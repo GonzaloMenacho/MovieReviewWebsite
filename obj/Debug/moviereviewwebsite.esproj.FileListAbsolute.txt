@@ -1,0 +1,2 @@
+C:\Users\pikal\source\repos\moviereviewwebsite\obj\Debug\moviereviewwebsite.esproj.SuggestedBindingRedirects.cache
+C:\Users\pikal\source\repos\moviereviewwebsite\obj\Debug\moviereviewwebsite.esproj.CoreCompileInputs.cache
