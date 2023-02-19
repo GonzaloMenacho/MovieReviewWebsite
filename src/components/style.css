@@ -1,0 +1,41 @@
+.reviews {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 95%;
+    padding: 16px;
+    text-align: center;
+  }
+
+
+/* Style the search box inside the navigation bar */
+.reviews input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    border: 1px solid black;   
+  }
+
+  .reviews .search-container button {
+    float: right;
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .reviews .search-container button:hover {
+    background: #ccc;
+  }
+  
+  .title{
+    text-align: center;
+  }
