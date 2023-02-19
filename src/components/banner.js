@@ -1,7 +1,17 @@
 import React from 'react'
+import './style.css';
 
-class Banner extends React.Component {
+class Title extends React.Component {
     render(){
-        return <div style={{ border: '1px solid red' }}> Hello World </div>;
+        return(
+            <div className='title'>
+            <div>
+                <h1>Searchable Movie Reviews</h1>
+            </div>
+
+        </div>
+        );
     }
 }
+
+export default Title;
