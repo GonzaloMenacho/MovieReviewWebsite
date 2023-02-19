@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.nav {
+  background-color: #00665e;
+  color: #f9faf8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  gap: 1rem;
+}
+
+.nav a {
+  color: inherit;
+}
+
+.nav button {
+  cursor: pointer;
+  outline: 0;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: white;
+  border-color: white;
+  margin: 0 0.25rem 0 0.25rem;
+}
+
+.nav button:hover {
+  color: #fff;
+  background-color: #00998c;
+  border-color: #00998c;
+}
+
+.search-bar {
+  
+  margin: 0 0.25rem 0 0.25rem;
+  border-color: white;
+  height: 30px;
+  width: 50vw;
+  max-width: 1000px;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  outline: 0;
+  padding-left: 10px;
+  padding-top: 4px;
+}

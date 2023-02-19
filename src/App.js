@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReviewDisplay from './components/reviewdisplay';
 import Title from './components/banner';
 import Reviews from './components/searchreviewusingmovie';
+import Navbar from './components/navbar';
 import './App.css';
 
 const client = axios.create({
@@ -17,9 +18,6 @@ export default class App extends React.Component {
 
             
             <div className="app">
-                <div className='head'>
-                    <Title />
-                </div>
                 <div className="get-review">
                     <Reviews />
                 </div>
