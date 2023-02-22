@@ -18,6 +18,7 @@ export default class App extends React.Component {
 
             
             <div className="app">
+                <Navbar/>
                 <div className="get-review">
                     <Reviews />
                 </div>
