@@ -5,6 +5,7 @@ import Title from './components/banner';
 import SearchBar from './components/searchreviewusingmovie';
 import Navbar from './components/navbar';
 import './App.css';
+import ResultSkel from './components/resultskel';
 
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',

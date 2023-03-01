@@ -1,3 +1,132 @@
+.outerBox{
+  width: 90%;
+  height: 70%;
+  background-color: #ccc;
+  border: 1px solid #000;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.movieImage{
+  width: 30%;
+  height: 85%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 1.5% ;
+  position: absolute;
+  left: 0;
+}
+
+.movieRating{
+  width: 7%;
+  height: 5%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 5%;
+  left: 1.5%;
+  text-align: center;
+}
+
+.movieRating p{
+  font-size:1em;
+  line-height: 0;
+}
+
+.movieReleaseDate{
+  width: 15%;
+  height: 5%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 5%;
+  left: 10%;
+  text-align: center;
+}
+
+.movieReleaseDate p{
+  font-size: 1em;
+  line-height: 0;
+}
+
+.movieName{
+  width: 20%;
+  height: 5%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000;
+  border-radius: 5px;
+  position: absolute;
+  text-align: left;
+  padding-left:.5%;
+  top: 4%;
+  left: 32%;
+}
+
+.movieName p{
+  font-size: 1em;
+  line-height: 0;
+}
+
+.reviewTitle{
+  width: 20%;
+  height: 5%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000;
+  border-radius: 5px;
+  position: absolute;
+  text-align: left;
+  padding-left:.5%;
+  top: 11%;
+  left: 32%;
+}
+
+.reviewTitle p{
+  font-size: 1em;
+  line-height: 0;
+}
+
+.reviewRating{
+  width: 15%;
+  height: 5%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000;
+  border-radius: 5px;
+  position: absolute;
+  text-align: left;
+  padding-left:.5%;
+  top: 11%;
+  left: 53%;
+}
+
+.reviewRating p {
+  font-size: 1em;
+  line-height: 0;
+}
+
+.review{
+  width: 67%;
+  height: 71%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000;
+  border-radius: 5px;
+  position: absolute;
+  text-align: left;
+  padding-left:.5%;
+  top: 18%;
+  left: 32%;
+}
+
+.review p{
+  font-size: 1em;
+  line-height: 0;
+}
+
 .reviews {
     overflow: hidden;
     display: flex;
@@ -39,3 +168,4 @@
   .title{
     text-align: center;
   }
+
