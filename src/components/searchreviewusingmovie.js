@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import EventEmitter from 'events';
+import ResultsDisplay from './resultsdisplay';
+
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
     header: { 'X-Custom-Header': 'foobar' }
@@ -35,8 +36,11 @@ class SearchBar extends React.Component {
 
                 <button className="search-button">Advanced</button>
 
-
-                {/*this.state.movieposts &&
+                <div className="results">
+                    <ResultsDisplay movieposts={this.state.movieposts} reviewposts={this.state.reviewposts} />
+                </div>
+                {/*
+                this.state.movieposts &&
                 <div className="all-movies-display" key="movies">
                     {this.state.movieposts.map((post, index) => {
                         return (
@@ -95,9 +99,6 @@ class SearchBar extends React.Component {
         client.get(`Movies/title?m_title=${this.state.searchterm}`).then((response) => {
             console.log(this.state.searchterm)
             var data = response.data;
-            this.setState({
-                movieposts: data,   // save the movie json list into movieposts
-            })
 
             // for each movie, find 10 reviews and save into a list
             // reviewlist = [[reviewlist1], [reviewlist2], [reviewlist3]...[reviewlistN]]
@@ -115,6 +116,7 @@ class SearchBar extends React.Component {
 
             // save the review list to the reviewposts state variable
             this.setState({
+                movieposts: data,   // save the movie json list into movieposts
                 reviewposts: reviewlist,
             })
 
