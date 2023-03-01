@@ -5,6 +5,7 @@ import Title from './components/banner';
 import Reviews from './components/searchreviewusingmovie';
 import Navbar from './components/navbar';
 import './App.css';
+import ResultSkel from './components/resultskel';
 
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
@@ -19,9 +20,7 @@ export default class App extends React.Component {
             
             <div className="app">
                 <Navbar/>
-                <div className="get-review">
-                    <Reviews />
-                </div>
+
 
                 
 
