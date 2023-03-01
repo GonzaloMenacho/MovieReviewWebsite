@@ -22,16 +22,18 @@ export default class App extends React.Component {
                 <div className="nav-bar">
                     <Navbar />
                 </div>
-                {
+
                 <div className="get-review">
                     <SearchBar />
                 </div>
-                }
-                {/*
-                <div className="get-all-reviews">
+
+                <div className="results-display">
                     <ReviewDisplay />
                 </div>
-                */}
+
+                <div className="results-skel">
+                    <ResultSkel />
+                </div>
             </div>
         )
     }

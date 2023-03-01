@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+
 import EventEmitter from 'events';
+var ee = new EventEmitter();
+
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
     header: { 'X-Custom-Header': 'foobar' }
