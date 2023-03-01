@@ -20,64 +20,29 @@ class SearchBar extends React.Component {
 
     render() {
         return (
-            <div className="search">
-                <input
-                    className="search-bar"
-                    onChange={this.changeValue}
-                    type="text"
-                    placeholder="Search a Movie..."
-                    name="searchbar"
-                    value={this.state.searchterm}
-                />
+            <>
+            <div className="search">    
+                <div className="search-field">
+                    <input
+                        className="search-bar"
+                        onChange={this.changeValue}
+                        type="text"
+                        placeholder="Search a Movie..."
+                        name="searchbar"
+                        value={this.state.searchterm}
+                    />
 
-                <button className="search-button" onClick={this.getReviews}>
-                    Search
-                </button>
+                    <button className="search-button" onClick={this.getReviews}>
+                        Search
+                    </button>
 
-                <button className="search-button">Advanced</button>
-
-                <div className="results">
-                    <ResultsDisplay movieposts={this.state.movieposts} reviewposts={this.state.reviewposts} />
+                    <button className="search-button">Advanced</button>
                 </div>
-                {/*
-                this.state.movieposts &&
-                <div className="all-movies-display" key="movies">
-                    {this.state.movieposts.map((post, index) => {
-                        return (
-                            <div className="post-card" key={index}>
-                                <h2 className="post-title">{post.title}</h2>
-                                <p className="post-rating">Rating: {post.movieIMDbRating}</p>
-                                <p className="post-desc">Description: {post.description}</p>
-                                <hr />
-                            </div>
-                        );
-                    })}
-                </div>
-                }
-
-
-                {this.state.reviewposts &&
-                    <div className="all-reviews-display" key="reviews">
-                        {this.state.reviewposts.map((moviereviewlist, index) => {
-                            return (
-                                <div key={index}>
-                                    {moviereviewlist.map((review, i) => {
-                                        return (
-                                            <div className="review-card" key={i}>
-                                                <h3 className="review-title">{review.reviewTitle}</h3>
-                                                <p className="review-body">{review.reviewBody}</p>
-                                            </div>
-                                        )
-                                    })}
-                                    <hr />
-                                </div>
-                            )
-                        })}
-                    </div>
-                */}
-
-
-            </div>              
+            </div>     
+            <div className="results">
+               <ResultsDisplay movieposts={this.state.movieposts} reviewposts={this.state.reviewposts} />
+            </div>
+            </>
         );
     }
 
@@ -87,7 +52,7 @@ class SearchBar extends React.Component {
         this.setState({
             searchterm: event.target.value
         });
-        console.log(this.state.reviewposts);
+        //console.log(this.state.reviewposts);
     }
 
 
@@ -97,7 +62,6 @@ class SearchBar extends React.Component {
     getReviews = () => {
         // Find as many relevant reviews using a Regex search
         client.get(`Movies/title?m_title=${this.state.searchterm}`).then((response) => {
-            console.log(this.state.searchterm)
             var data = response.data;
 
             // for each movie, find 10 reviews and save into a list
@@ -112,7 +76,6 @@ class SearchBar extends React.Component {
                         });
                 }
             )
-            console.log(reviewlist)
 
             // save the review list to the reviewposts state variable
             this.setState({
@@ -120,8 +83,8 @@ class SearchBar extends React.Component {
                 reviewposts: reviewlist,
             })
 
-            console.log(reviewlist)
-            console.log(this.state.reviewposts);
+            //console.log(reviewlist)
+            //console.log(this.state.reviewposts);
         });
     }
 

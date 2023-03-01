@@ -13,7 +13,7 @@ class ResultsDisplay extends React.Component {
 
     render() {
         return (
-        <div>
+        <div className="results-display">
         {
             this.props.movieposts &&
             <div className="all-movies-display" key="movies">

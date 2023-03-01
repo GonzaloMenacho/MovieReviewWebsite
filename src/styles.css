@@ -55,7 +55,7 @@ body {
   border-color: #00998c;
 }
 
-.search button {
+.search .search-field button {
   cursor: pointer;
   outline: 0;
   display: run-in;
@@ -74,18 +74,19 @@ body {
   margin: 0 0.25rem 0 0.25rem;
 }
 
-.search button:hover {
+.search .search-field button:hover {
   color: #fff;
   background-color: #00998c;
   border-color: #00998c;
 }
 
-.search .search-bar {
+.search .search-field .search-bar {
+    clear: both;
     margin: 0 0.25rem 0 0.25rem;
     border-color: navajowhite;
     height: 30px;
     width: 50vw;
-    max-width: 400px;
+    max-width: 1000px;
     border-radius: 0.35rem;
     font-size: 1rem;
     outline: 0;
@@ -98,10 +99,14 @@ body {
   border-color: white;
   height: 30px;
   width: 50vw;
-  max-width: 400px;
+  max-width: 1000px;
   border-radius: 0.25rem;
   font-size: 1rem;
   outline: 0;
   padding-left: 10px;
   padding-top: 4px;
+}
+
+.search .results {
+
 }
