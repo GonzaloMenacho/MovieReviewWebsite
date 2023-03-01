@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ReviewDisplay from './components/reviewdisplay';
+import ResultsDisplay from './components/resultsdisplay';
 import Title from './components/banner';
 import SearchBar from './components/searchreviewusingmovie';
 import Navbar from './components/navbar';
@@ -22,15 +22,23 @@ export default class App extends React.Component {
                 <div className="nav-bar">
                     <Navbar />
                 </div>
+
                 {
                 <div className="get-review">
                     <SearchBar />
                 </div>
                 }
-                {/*
-                <div className="get-all-reviews">
-                    <ReviewDisplay />
+
+                {
+                <div className="results-display">
+                    <ResultsDisplay />
                 </div>
+                }
+
+                {/*
+                    <div className="results-skel">
+                        <ResultSkel />
+                    </div>
                 */}
             </div>
         )
