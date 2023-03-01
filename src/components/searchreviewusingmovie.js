@@ -1,45 +1,49 @@
-import React from 'react';
-import axios from 'axios';
-import ResultsDisplay from './resultsdisplay';
+import React from "react";
+import axios from "axios";
+import ResultsDisplay from "./resultsdisplay";
+import AdvancedBtn from "./advancedbtn";
 
 const client = axios.create({
-    baseURL: 'https://localhost:7035/api/',
-    header: { 'X-Custom-Header': 'foobar' }
+  baseURL: "https://localhost:7035/api/",
+  header: { "X-Custom-Header": "foobar" },
 });
 
 class SearchBar extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            searchterm: "",
-            movieposts: [],
-            reviewposts: []
-        };
-    }
+    this.state = {
+      searchterm: "",
+      movieposts: [],
+      reviewposts: [],
+    };
+  }
 
-    render() {
-        return (
-            <div className="search">
-                <input
-                    className="search-bar"
-                    onChange={this.changeValue}
-                    type="text"
-                    placeholder="Search a Movie..."
-                    name="searchbar"
-                    value={this.state.searchterm}
-                />
+  render() {
+    return (
+      <div className="search">
+        <input
+          className="search-bar"
+          onChange={this.changeValue}
+          type="text"
+          placeholder="Search a Movie..."
+          name="searchbar"
+          value={this.state.searchterm}
+        />
 
-                <button className="search-button" onClick={this.getReviews}>
-                    Search
-                </button>
+        <button className="search-button" onClick={this.getReviews}>
+          Search
+        </button>
 
-                <button className="search-button">Advanced</button>
+        <AdvancedBtn></AdvancedBtn>
 
-                <div className="results">
-                    <ResultsDisplay movieposts={this.state.movieposts} reviewposts={this.state.reviewposts} />
-                </div>
-                {/*
+        <div className="results">
+          <ResultsDisplay
+            movieposts={this.state.movieposts}
+            reviewposts={this.state.reviewposts}
+          />
+        </div>
+        {/*
                 this.state.movieposts &&
                 <div className="all-movies-display" key="movies">
                     {this.state.movieposts.map((post, index) => {
@@ -75,67 +79,62 @@ class SearchBar extends React.Component {
                         })}
                     </div>
                 */}
+      </div>
+    );
+  }
 
+  // updates the input field when something is being typed
+  changeValue = (event) => {
+    this.setState({
+      searchterm: event.target.value,
+    });
+    console.log(this.state.reviewposts);
+  };
 
-            </div>              
+  // This function takes the variable in the search term,
+  // searches for relevant movies, then searches for relevant reviews.
+  // example api route = 'https://localhost:7035/api/Movies/title?m_title=avengers'
+  getReviews = () => {
+    // Find as many relevant reviews using a Regex search
+    client
+      .get(`Movies/title?m_title=${this.state.searchterm}`)
+      .then((response) => {
+        console.log(this.state.searchterm);
+        var data = response.data;
+
+        // for each movie, find 10 reviews and save into a list
+        // reviewlist = [[reviewlist1], [reviewlist2], [reviewlist3]...[reviewlistN]]
+        var reviewlist = [];
+        data.forEach(
+          // loop through each movie in the movieposts state variable
+          (d) => {
+            this.fetchData(d.movieID) // grab the response data
+              .then((reviewresponse) => {
+                //console.log(reviewresponse);  // to see the response
+                reviewlist.push(reviewresponse); // add the data to the reviewlist
+              });
+          }
         );
-    }
+        console.log(reviewlist);
 
-
-    // updates the input field when something is being typed
-    changeValue = (event) => {
+        // save the review list to the reviewposts state variable
         this.setState({
-            searchterm: event.target.value
+          movieposts: data, // save the movie json list into movieposts
+          reviewposts: reviewlist,
         });
+
+        console.log(reviewlist);
         console.log(this.state.reviewposts);
-    }
+      });
+  };
 
-
-    // This function takes the variable in the search term, 
-    // searches for relevant movies, then searches for relevant reviews.
-    // example api route = 'https://localhost:7035/api/Movies/title?m_title=avengers'
-    getReviews = () => {
-        // Find as many relevant reviews using a Regex search
-        client.get(`Movies/title?m_title=${this.state.searchterm}`).then((response) => {
-            console.log(this.state.searchterm)
-            var data = response.data;
-
-            // for each movie, find 10 reviews and save into a list
-            // reviewlist = [[reviewlist1], [reviewlist2], [reviewlist3]...[reviewlistN]]
-            var reviewlist = [];
-            data.forEach(   // loop through each movie in the movieposts state variable
-                d => {
-                    this.fetchData(d.movieID)   // grab the response data
-                        .then((reviewresponse) => {
-                            //console.log(reviewresponse);  // to see the response
-                            reviewlist.push(reviewresponse);    // add the data to the reviewlist
-                        });
-                }
-            )
-            console.log(reviewlist)
-
-            // save the review list to the reviewposts state variable
-            this.setState({
-                movieposts: data,   // save the movie json list into movieposts
-                reviewposts: reviewlist,
-            })
-
-            console.log(reviewlist)
-            console.log(this.state.reviewposts);
-        });
-    }
-
-
-    // this function returns a list of reviews based on the movieID passed in
-    fetchData = async(movieID) =>
-    {
-        return client.get(`Reviews/GetByID?movieID=${movieID}`)
-        .then((response) => {
-            //console.log(response.data); // this should be an array of reviews
-            return response.data;
-        })
-    }
-
+  // this function returns a list of reviews based on the movieID passed in
+  fetchData = async (movieID) => {
+    return client.get(`Reviews/GetByID?movieID=${movieID}`).then((response) => {
+      //console.log(response.data); // this should be an array of reviews
+      return response.data;
+    });
+  };
 }
 
 export default SearchBar;
