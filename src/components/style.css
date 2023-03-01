@@ -150,20 +150,29 @@
     border: 1px solid black;   
   }
 
-  .reviews .search-container button {
-    float: right;
-    padding: 6px;
-    margin-top: 8px;
-    margin-right: 16px;
-    background: #ddd;
-    font-size: 17px;
-    border: none;
+.reviews .search-container button {
     cursor: pointer;
-  }
-  
-  .reviews .search-container button:hover {
-    background: #ccc;
-  }
+    outline: 0;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    color: white;
+    border-color: white;
+    margin: 0 0.25rem 0 0.25rem;
+}
+
+.reviews .search-container button:hover {
+    color: #fff;
+    background-color: #00998c;
+    border-color: #00998c;
+}
   
   .title{
     text-align: center;
