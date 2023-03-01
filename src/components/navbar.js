@@ -7,15 +7,6 @@ export default function Navbar() {
       <a href="/" className="logo">
         <img className="logo" src={logo}></img>
       </a>
-      {/* <form>
-        <input
-          className="search-bar"
-          type="text"
-          placeholder="Search for movies or reviews"
-          name="searchbar"
-        />
-      </form> */}
-      
     </nav>
   );
 }
