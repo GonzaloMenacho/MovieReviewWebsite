@@ -13,6 +13,15 @@ const client = axios.create({
 });
 
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            movieposts: [],
+            reviewposts: []
+        };
+    }
+
 
     render() {
         return (
