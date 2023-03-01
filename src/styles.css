@@ -93,11 +93,7 @@ body {
 }
 
 .search-bar {
-<<<<<<< HEAD
-  margin: 0.25rem 1rem 0.5rem;
-=======
   margin: 0 0.25rem 0 0.25rem;
->>>>>>> dc5ab81ced8d955ed275b1d08fd30a418b959af5
   border-color: white;
   height: 30px;
   width: 50vw;
