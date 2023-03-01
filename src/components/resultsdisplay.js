@@ -12,10 +12,12 @@ class ResultsDisplay extends React.Component {
     }
 
     render() {
+        return (
+        <div>
         {
-            this.state.movieposts &&
+            this.props.movieposts &&
             <div className="all-movies-display" key="movies">
-                {this.state.movieposts.map((post, index) => {
+                {this.props.movieposts.map((post, index) => {
                     return (
                         <div className="post-card" key={index}>
                             <h2 className="post-title">{post.title}</h2>
@@ -28,11 +30,10 @@ class ResultsDisplay extends React.Component {
             </div>
         }
 
-
         {
-            this.state.reviewposts &&
+            this.props.reviewposts &&
             <div className="all-reviews-display" key="reviews">
-                {this.state.reviewposts.map((moviereviewlist, index) => {
+                {this.props.reviewposts.map((moviereviewlist, index) => {
                     return (
                         <div key={index}>
                             {moviereviewlist.map((review, i) => {
@@ -48,7 +49,10 @@ class ResultsDisplay extends React.Component {
                     )
                 })}
             </div>
-        }
-
+                }
+        </div>
+        );
     }
 }
+
+export default ResultsDisplay;

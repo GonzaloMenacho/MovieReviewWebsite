@@ -13,9 +13,9 @@ class Navbar extends React.Component {
                 <a href="/" className="logo">
                     <img src={logo}></img>
                 </a>
-                {
-                    
-                }
+                {/*
+                    <SearchBar />
+                */}
 
                 {/*
           <form>
