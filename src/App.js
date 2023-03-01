@@ -26,10 +26,6 @@ export default class App extends React.Component {
                     <SearchBar />
                 </div>
 
-                <div className='skelres'>
-                    <ResultSkel />
-                </div>
-
                 {/*
                 <div className="get-all-reviews">
                     <ReviewDisplay />
