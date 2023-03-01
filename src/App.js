@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ReviewDisplay from './components/reviewdisplay';
 import Title from './components/banner';
-import Reviews from './components/searchreviewusingmovie';
+import SearchBar from './components/searchreviewusingmovie';
 import Navbar from './components/navbar';
 import './App.css';
 import ResultSkel from './components/resultskel';
@@ -19,14 +19,17 @@ export default class App extends React.Component {
 
             
             <div className="app">
-                <Navbar/>
-
-
-                
-
-{/*                <div className="get-all-reviews">
+                <div className="nav-bar">
+                    <Navbar />
+                </div>
+                <div className="get-review">
+                    <SearchBar />
+                </div>
+                {/*
+                <div className="get-all-reviews">
                     <ReviewDisplay />
-        </div>*/}
+                </div>
+                */}
             </div>
         )
     }
