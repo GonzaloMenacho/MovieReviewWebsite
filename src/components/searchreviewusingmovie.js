@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './style.css';
+import EventEmitter from 'events';
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
     header: { 'X-Custom-Header': 'foobar' }
@@ -20,21 +20,23 @@ class SearchBar extends React.Component {
     render() {
         return (
             <div className="search">
+                <input
+                    className="search-bar"
+                    onChange={this.changeValue}
+                    type="text"
+                    placeholder="Search a Movie..."
+                    name="searchbar"
+                    value={this.state.searchterm}
+                />
 
-                <div id="search-bar">
-                    <input onChange={this.changeValue}
-                        type="text" placeholder="Search a Movie Title..." value={this.state.searchterm} />
-                </div>
+                <button className="search-button" onClick={this.getReviews}>
+                    Search
+                </button>
+
+                <button className="search-button">Advanced</button>
 
 
-                <div className="search-button">
-                    <button onClick={this.getReviews}>
-                        Get Results
-                    </button>
-                </div>
-
-
-                {this.state.movieposts &&
+                {/*this.state.movieposts &&
                 <div className="all-movies-display" key="movies">
                     {this.state.movieposts.map((post, index) => {
                         return (
@@ -68,7 +70,7 @@ class SearchBar extends React.Component {
                             )
                         })}
                     </div>
-                }
+                */}
 
 
             </div>              
@@ -91,6 +93,7 @@ class SearchBar extends React.Component {
     getReviews = () => {
         // Find as many relevant reviews using a Regex search
         client.get(`Movies/title?m_title=${this.state.searchterm}`).then((response) => {
+            console.log(this.state.searchterm)
             var data = response.data;
             this.setState({
                 movieposts: data,   // save the movie json list into movieposts
@@ -108,7 +111,7 @@ class SearchBar extends React.Component {
                         });
                 }
             )
-            //console.log(reviewlist)
+            console.log(reviewlist)
 
             // save the review list to the reviewposts state variable
             this.setState({
