@@ -46,7 +46,6 @@ body {
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   color: white;
   border-color: white;
-  margin: 0 0.25rem 0 0.25rem;
 }
 
 .nav button:hover {
@@ -104,4 +103,73 @@ body {
   outline: 0;
   padding-left: 10px;
   padding-top: 4px;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: black;
+}
+
+.popup h1 {
+  font-size: xx-large;
+  color: #00998c;
+  text-shadow: -.5px -.5px 0 #000, .5px -.5px 0 #000, -.5px .5px 0 #000,
+  .5px .5px 0 #000;
+}
+
+.popup p {
+  font-size: 16px;
+  color: black;
+  margin: 0;
+  padding: 0.25rem 0.25rem 0.25rem 0;
+}
+
+.popup button {
+  background-color: #00665e;
+  margin: 1rem 0.25rem 0.5rem 0;
+}
+
+.popup .btn-active {
+  background-color: #00998c;
+}
+
+.popup input {
+  border-radius: .25rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.popup .review-search {
+  margin-left: 2.3rem;
+}
+
+.popup .movie-search {
+  margin-left: 1rem;
+  
+}
+
+.popup .max,
+.min {
+  margin-top: 0.5rem;
+  width: 38px;
+}
+
+@media (max-width: 940px) {
+  .nav .advanced-btn,
+  .nav .popup {
+    display: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .nav .logo {
+    display: none;
+  }
 }
