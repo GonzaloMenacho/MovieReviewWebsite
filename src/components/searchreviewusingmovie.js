@@ -96,7 +96,7 @@ class SearchBar extends React.Component {
 
   // this function returns a list of reviews based on the movieID passed in
   fetchData = async (movieID) => {
-    return client.get(`Reviews/GetByID?movieID=${movieID}`).then((response) => {
+    return client.get(`Reviews/id=${movieID}`).then((response) => {
       //console.log(response.data); // this should be an array of reviews
       return response.data;
     });
