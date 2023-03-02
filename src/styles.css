@@ -7,17 +7,17 @@ body {
 }
 
 .nav {
-  background-color: #00665e;
-  color: #f9faf8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 1rem;
-  gap: 1rem;
+    background-color: #1dc9bb;
+    color: #f9faf8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 1rem;
 }
 
 .search {
-    background-color: #00665e;
+    background-color: #1dc9bb;
     color: #f9faf8;
     display: flex;
     justify-content: center;
@@ -33,11 +33,11 @@ body {
 .nav button {
   cursor: pointer;
   outline: 0;
-  display: inline-block;
+  display: run-in;
   font-weight: 400;
   line-height: 1;
   text-align: center;
-  background-color: transparent;
+  background-color: #00998c;
   border: 1px solid transparent;
   padding: 6px 12px;
   font-size: 1rem;
@@ -45,38 +45,38 @@ body {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   color: white;
+  background-color: #00665e;
   border-color: white;
 }
 
 .nav button:hover {
-  color: #fff;
-  background-color: #00998c;
-  border-color: #00998c;
+    color: #fff;
+    background-color: #00665e;
+    border-color: #00665e;
 }
 
 .search .search-field button {
-  cursor: pointer;
-  outline: 0;
-  display: run-in;
-  font-weight: 400;
-  line-height: 1;
-  text-align: center;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: 6px 12px;
-  font-size: 1rem;
-  border-radius: 0.35rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  color: white;
-  border-color: white;
-  margin: 0 0.25rem 0 0.25rem;
+    cursor: pointer;
+    outline: 0;
+    display: run-in;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    background-color: #00998c;
+    border: 0px solid transparent;
+    padding: 3px 12px;
+    font-size: 1.35rem;
+    border-radius: 0.35rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    color: white;
+    border-color: white;
+    margin: 0 0.25rem 0 0.25rem;
 }
 
 .search .search-field button:hover {
-  color: #fff;
-  background-color: #00998c;
-  border-color: #00998c;
+    color: #fff;
+    background-color: #00665e;
+    border-color: white;
 }
 
 .search .search-field .search-bar {
@@ -85,7 +85,7 @@ body {
     border-color: navajowhite;
     height: 30px;
     width: 50vw;
-    max-width: 1000px;
+    max-width: 700px;
     border-radius: 0.35rem;
     font-size: 1rem;
     outline: 0;
@@ -106,8 +106,7 @@ body {
   padding-top: 4px;
 }
 
-<<<<<<< HEAD
-.popup {
+.search .popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -119,59 +118,62 @@ body {
   color: black;
 }
 
-.popup h1 {
+.search .popup h1 {
   font-size: xx-large;
   color: #00998c;
   text-shadow: -.5px -.5px 0 #000, .5px -.5px 0 #000, -.5px .5px 0 #000,
   .5px .5px 0 #000;
 }
 
-.popup p {
+.search .popup p {
   font-size: 16px;
   color: black;
   margin: 0;
   padding: 0.25rem 0.25rem 0.25rem 0;
 }
 
-.popup button {
-  background-color: #00665e;
+.search .popup button {
+  background-color: #00998c;
   margin: 1rem 0.25rem 0.5rem 0;
 }
 
-.popup .btn-active {
-  background-color: #00998c;
+.search .popup .btn-active {
+  background-color: #00665e;
+  border-color: black;
 }
 
-.popup input {
+.search .popup input {
   border-radius: .25rem;
   padding: 0.25rem 0.25rem 0.25rem 0.25rem;
   margin-bottom: 0.5rem;
 }
 
-.popup .review-search {
+.search .popup .review-search {
   margin-left: 2.3rem;
 }
 
-.popup .movie-search {
+.search .popup .movie-search {
   margin-left: 1rem;
   
 }
 
-.popup .max,
+.search .popup .max,
 .min {
   margin-top: 0.5rem;
   width: 38px;
 }
 
 @media (max-width: 940px) {
+  .advanced-btn,
+  .popup,
   .nav .advanced-btn,
   .nav .popup {
-    display: none;
+    display: inline-flex;
   }
 }
 
 @media (max-width: 750px) {
   .nav .logo {
-    display: none;
+    display: run-in;
   }
 }
