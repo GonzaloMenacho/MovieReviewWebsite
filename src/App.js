@@ -6,6 +6,7 @@ import SearchBar from './components/searchreviewusingmovie';
 import Navbar from './components/navbar';
 import './App.css';
 import ResultSkel from './components/resultskel';
+import MyApp from './components/muiEx';
 
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
@@ -49,6 +50,13 @@ export default class App extends React.Component {
                         <ResultSkel />
                     </div>
                 */}
+
+                {/*mui example button*/
+                    <div>
+                        <MyApp />
+                    </div>
+
+                }
             </div>
         )
     }
