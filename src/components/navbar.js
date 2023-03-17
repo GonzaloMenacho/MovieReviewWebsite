@@ -1,5 +1,6 @@
 import logo from "../images/logo.png";
 import AdvancedBtn from "./advancedbtn";
+import AdvancedPopup from "./advancedpopup";
 export default function Navbar() {
   
   return (
@@ -7,6 +8,7 @@ export default function Navbar() {
       <a href="/" className="logo">
         <img className="logo" src={logo}></img>
       </a>
+      <AdvancedPopup></AdvancedPopup>
     </nav>
   );
 }
