@@ -1,118 +1,154 @@
-import Button from "../Button";
-import { useState } from "react";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import List from "@mui/material/List";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+import { Box } from "@mui/material";
+import ContentRatingCheckBoxes from "./contentratingcheckboxes";
+import AdvancedTextField from "./advancedtextfields";
+import RatingScores from "./ratingscores";
 
-function AdvancedPopup() {
-  const [formData, setFormData] = useState({
-    movie: "",
-    review: "",
-    min: "",
-    max: "",
-  });
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
-  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
+export default function AdvancedPopup() {
+  const [open, setOpen] = React.useState(false);
+  const [textValues, setTextValues] = React.useState(["", ""]);
+  const [contentRating, setContentRating] = React.useState(
+    Array.from({ length: 7 }, () => false)
+  );
+  const [genre, setGenre] = React.useState(
+    Array.from({ length: 6 }, () => false)
+  );
+  const [minValue, setMinValue] = React.useState(0);
+  const [maxValue, setMaxValue] = React.useState(5);
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    // do something with form data
-  }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-  function handleClearForm() {
-    setFormData({
-      movie: "",
-      review: "",
-      min: "",
-      max: "",
+  const handleReset = () => {
+    setTextValues(["", ""]);
+    setContentRating(Array.from({ length: 7 }, () => false));
+    setGenre(Array.from({ length: 6 }, () => false));
+    setMinValue(0);
+    setMaxValue(5);
+  };
+
+  const handleTextChange = (event, index) => {
+    setTextValues([
+      ...textValues.slice(0, index),
+      event.target.value,
+      ...textValues.slice(index + 1),
+    ]);
+  };
+
+  const handleContentRatingChange = (index) => (event) => {
+    setContentRating((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[index] = event.target.checked;
+      return newValues;
     });
-  }
+  };
+
+  const handleGenreChange = (index) => (event) => {
+    setGenre((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[index] = event.target.checked;
+      return newValues;
+    });
+  };
 
   return (
-    <div className="popup">
-      <form>
-        <h1>Advanced Search</h1>
-        Movie Title: 
-        <input
-          className="movie-search"
-          type="text"
-          name="movie"
-          value={formData.movie}
-          onChange={handleChange}
-        />
-        <br></br>
-        Reviews:
-        <input
-          className="review-search"
-          type="text"
-          name="review"
-          value={formData.review}
-          onChange={handleChange}
-        />
-
-        <div>
-          <button
-            className="filter-btn"
-            type="button"
-            onClick={() => setIsFiltersVisible(!isFiltersVisible)}
+    <div>
+      <Button
+        variant="outlined"
+        onClick={handleClickOpen}
+        sx={{ textTransform: "Capitalize" }}
+      >
+        Advanced Search
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={{ position: "relative" }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Advanced Search
+            </Typography>
+            <Button autoFocus color="inherit" onClick={handleClose}>
+              Search
+            </Button>
+            <Button autoFocus color="inherit" onClick={handleReset}>
+              Reset
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <List>
+          <Box
+            component="form"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              m: 2,
+              width: "fit-content",
+            }}
+            noValidate
+            autoComplete="off"
           >
-            {isFiltersVisible ? "Hide Filters" : "Filters"}
-          </button>
-          {isFiltersVisible && (
-            <div className="filters">
-              
-              <p>Content Rating</p>
-              <Button name="G"></Button>
-              <Button name="PG"></Button>
-              <Button name="PG-13"></Button>
-              <Button name="R"></Button>
-              <Button name="NC-17"></Button>
-              <Button name="Not Rated"></Button>
-              <Button name="Unrated"></Button>
-              <p>Genre</p>
-              <Button name="Action"></Button>
-              <Button name="Horror"></Button>
-              <Button name="Romance"></Button>
-              <Button name="Drama"></Button>
-              <Button name="Thriller"></Button>
-              <Button name="Comedy"></Button>
-              <br/>
-              Rating Score: &nbsp;
-              <input
-                className="min"
-                type="text"
-                placeholder="Min"
-                name="min"
-                value={formData.min}
-                onChange={handleChange}
-              />{" "}
-              -{" "}
-              <input
-                className="max"
-                type="text"
-                placeholder="Max"
-                name="max"
-                value={formData.max}
-                onChange={handleChange}
+            <List>
+              <AdvancedTextField
+                textValues={textValues}
+                handleTextChange={handleTextChange}
               />
-            </div>
-          )}
-        </div>
+              <ContentRatingCheckBoxes
+                contentRating={contentRating}
+                handleContentRatingChange={handleContentRatingChange}
+                genre={genre}
+                handleGenreChange={handleGenreChange}
+              />
 
-        <div className="sumbit-clear">
-          <button>Search</button>
-          <button type="button" onClick={handleClearForm}>
-            Clear
-          </button>
-        </div>
-      </form>
+              <RatingScores
+                minValue={minValue}
+                maxValue={maxValue}
+                setMinValue={setMinValue}
+                setMaxValue={setMaxValue}
+                // name="min"
+                // value={formValues.min}
+                // onChange={handleInputChange}
+                // precision={0.5}
+              />
+              {/* <Typography component="legend">Maximum Rating</Typography>
+                      <Rating
+                      // name="max"
+                      // value={formValues.max}
+                      // onChange={handleInputChange}
+                      // precision={0.5}
+                      /> */}
+            </List>
+          </Box>
+        </List>
+      </Dialog>
     </div>
   );
 }
-
-export default AdvancedPopup;

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ResultsDisplay from "./resultsdisplay";
 import AdvancedBtn from "./advancedbtn";
+import AdvancedPopup from "./advancedpopup";
 
 const client = axios.create({
   baseURL: "https://localhost:7035/api/",
@@ -32,12 +33,10 @@ class SearchBar extends React.Component {
                             name="searchbar"
                             value={this.state.searchterm}
                         />
-
+                        
                         <button className="search-button" onClick={this.getReviews}>
                             Search
                         </button>
-
-                        <AdvancedBtn></AdvancedBtn>
                     </div>
                 </div>
                 <div className="results">
