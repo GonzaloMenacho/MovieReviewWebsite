@@ -133,18 +133,7 @@ export default function AdvancedPopup() {
                 maxValue={maxValue}
                 setMinValue={setMinValue}
                 setMaxValue={setMaxValue}
-                // name="min"
-                // value={formValues.min}
-                // onChange={handleInputChange}
-                // precision={0.5}
               />
-              {/* <Typography component="legend">Maximum Rating</Typography>
-                      <Rating
-                      // name="max"
-                      // value={formValues.max}
-                      // onChange={handleInputChange}
-                      // precision={0.5}
-                      /> */}
             </List>
           </Box>
         </List>
