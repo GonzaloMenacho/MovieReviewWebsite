@@ -40,7 +40,7 @@ class ResultsDisplay extends React.Component {
                                 return (
                                     <div className="review-card" key={i}>
                                         <h3 className="review-title">{review.reviewTitle}</h3>
-                                        <p className="review-body">{review.reviewBody}</p>
+                                        {/*<p className="review-body">{review.reviewBody}</p> */}
                                     </div>
                                 )
                             })}
