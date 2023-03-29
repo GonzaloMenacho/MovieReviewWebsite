@@ -4,7 +4,7 @@ import axios from "axios";
 const movieReviewCache = {};
 
 const client = axios.create({
-    baseURL: "https://localhost:7035/api/",
+    baseURL: "http://localhost:5001/api/",
     header: { "X-Custom-Header": "foobar" },
 });
 
