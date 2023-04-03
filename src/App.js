@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ResultsDisplay from './components/resultsdisplay';
 import Title from './components/banner';
-import SearchBar from './components/searchreviewusingmovie';
+import SearchBar from './components/searchbar';
 import Navbar from './components/navbar';
 import './App.css';
 import ResultSkel from './components/resultskel';

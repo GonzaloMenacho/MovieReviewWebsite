@@ -1,5 +1,4 @@
 import React from 'react';
-import EventEmitter from 'events';
 
 class ResultsDisplay extends React.Component {
     constructor(props) {
