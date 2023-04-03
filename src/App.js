@@ -9,6 +9,7 @@ import ResultSkel from './components/resultskel';
 import CompForMoviePreview from './components/moviePrev_Res';
 import GroupedReviews from './components/movieDetails_Res';
 import MoviePreview from './components/moviepreview';
+import NoMovies from './components/nomovies';
 
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
@@ -57,7 +58,9 @@ export default class App extends React.Component {
                     <div>
                         {/* <CompForMoviePreview /> */}
                         <MoviePreview></MoviePreview>
+                        
                     </div>
+                    
 
                 }
                 {
@@ -66,6 +69,7 @@ export default class App extends React.Component {
                     </div>
 
                 }
+
             </div>
         )
     }
