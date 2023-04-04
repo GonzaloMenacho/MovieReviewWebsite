@@ -41,12 +41,6 @@ export default class App extends React.Component {
                 </div>
                 }
 
-                {
-                <div className="results-display">
-                    <ResultsDisplay />
-                </div>
-                }
-
                 {/*
                     <div className="results-skel">
                         <ResultSkel />

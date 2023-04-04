@@ -59,8 +59,8 @@ class SearchBar extends React.Component {
 
 
     // This function takes the variable in the search term, 
-    // searches for relevant movies, then searches for relevant reviews.
-    // example api route = 'https://localhost:7035/api/Movies/title?m_title=avengers'
+    // searches for relevant movies and reviews.
+    // example api route = 'https://localhost:7035/api/Movies/search?term=avengers'
     getReviews = () => {
         // Find as many relevant reviews using a Regex search
         client.get(`Movies/search?term=${this.state.searchterm}`).then((response) => {
