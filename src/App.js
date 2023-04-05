@@ -57,7 +57,6 @@ export default class App extends React.Component {
                 {
                     <div>
                         {/* <CompForMoviePreview /> */}
-                        <MoviePreview></MoviePreview>
                         
                     </div>
                     
@@ -65,7 +64,7 @@ export default class App extends React.Component {
                 }
                 {
                     <div>
-                        <GroupedReviews />
+                        {/* <GroupedReviews /> */}
                     </div>
 
                 }

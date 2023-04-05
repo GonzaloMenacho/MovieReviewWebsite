@@ -5,18 +5,18 @@ import { CardActionArea } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
-import Box from "@mui/material/Box";
-import NoMovies from "./nomovies";
 
-export default function MoviePreview() {
+export default function MoviePreview(props) {
+  
   const [showVideo, setShowVideo] = useState(false);
-  const movies = [];
   let timeoutId;
+  let url;
+  let embedded_url
 
   const handleMouseEnter = () => {
     timeoutId = setTimeout(() => {
       setShowVideo(true);
-    }, 1000); // add delay of 500ms (0.5 seconds)
+    }, 500); // add delay of 500ms (0.5 seconds)
   };
 
   const handleMouseLeave = () => {
@@ -24,33 +24,16 @@ export default function MoviePreview() {
     setShowVideo(false);
   };
 
-  const styles = {
-    container: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "top center",
-      height: "25vh",
-      padding: "3%",
-      flexWrap: "wrap",
-      "& > :not(style)": {
-        m: 1,
-        width: 300,
-        height: 460,
-      },
-      "&:hover": {
-        transform: "scale(1.1)",
-        transition: "transform 0.5s ease-in-out", // add transition for transform property
-      },
-      transition: "transform 0.5s ease-in-out", // add transition for transform property outside of &:hover selector
-    },
-  };
-
   return (
     <>
-      {movies.length === 0 && <NoMovies/>}
-      <Box sx={styles.container}>
+      {/* {props.movieposts.length === 0 && <NoMovies/>} */}
         <Card
-          sx={{ maxWidth: 300, border: "none" }}
+          sx={{ 
+            width:300, 
+            border: "none",
+            transform: showVideo ? "scale(1.05)" : "scale(1)", // update scale for card enlargement on hover
+            transition: "transform 0.3s ease-in-out" // add transition for smooth animation
+          }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -60,16 +43,18 @@ export default function MoviePreview() {
                 component="iframe"
                 width="100%"
                 height="180"
-                src="https://www.youtube.com/embed/TcMBFSGVi1c?autoplay=1"
+                {...url = props.movie.movieTrailer}
+                {...embedded_url = url.replace("https://youtu.be/", "https://www.youtube.com/embed/")}
+                src={embedded_url}
                 title="Trailer"
-                autoplay
                 muted
+                autoPlay
               />
             ) : (
               <CardMedia
                 component="img"
                 height="460"
-                image="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg"
+                image={props.movie.moviePoster}
                 alt="poster"
               />
             )}
@@ -82,7 +67,7 @@ export default function MoviePreview() {
                     component="div"
                     sx={{ paddingLeft: "5px" }}
                   >
-                    Avengers Endgame
+                    {props.movie.title}
                   </Typography>
                   <Typography
                     gutterBottom
@@ -90,7 +75,7 @@ export default function MoviePreview() {
                     component="div"
                     sx={{ paddingLeft: "5px" }}
                   >
-                    PG-13
+                    {props.movie.duration}
                   </Typography>
                   <Rating
                     name="read-only"
@@ -100,17 +85,13 @@ export default function MoviePreview() {
                     sx={{ paddingBottom: "10px" }}
                   />
                   <Typography variant="body1">
-                    After the devastating events of Avengers: Infinity War
-                    (2018), the universe is in ruins. With the help of remaining
-                    allies, the Avengers assemble once more in order to reverse
-                    Thanos' actions.
+                  {props.movie.description}
                   </Typography>
                 </CardContent>
               </div>
             ) : null}
           </CardActionArea>
         </Card>
-      </Box>
     </>
   );
 }
