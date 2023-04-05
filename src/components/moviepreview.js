@@ -2,94 +2,97 @@ import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Rating from '@mui/material/Rating';
-import Box from '@mui/material/Box';
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Rating from "@mui/material/Rating";
 
-export default function MoviePreview() {
+export default function MoviePreview(props) {
+  
   const [showVideo, setShowVideo] = useState(false);
-
   let timeoutId;
+  let url;
+  let embedded_url
 
-const handleMouseEnter = () => {
-  timeoutId = setTimeout(() => {
-    setShowVideo(true);
-  }, 1000); // add delay of 500ms (0.5 seconds)
-};
+  const handleMouseEnter = () => {
+    timeoutId = setTimeout(() => {
+      setShowVideo(true);
+    }, 500); // add delay of 500ms (0.5 seconds)
+  };
 
-const handleMouseLeave = () => {
-  clearTimeout(timeoutId);
-  setShowVideo(false);
-};
-
-const styles = {
-    container: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "top center",
-      height: "25vh",
-      padding: '3%',
-      flexWrap: 'wrap',
-      '& > :not(style)': {
-        m: 1,
-        width: 300,
-        height: 460,
-      },
-      '&:hover': {
-        transform: 'scale(1.1)',
-        transition: 'transform 0.5s ease-in-out', // add transition for transform property
-      },
-      transition: 'transform 0.5s ease-in-out', // add transition for transform property outside of &:hover selector
-    }
+  const handleMouseLeave = () => {
+    clearTimeout(timeoutId);
+    setShowVideo(false);
   };
 
   return (
-    <Box sx={styles.container}>
+    <>
+      {/* {props.movieposts.length === 0 && <NoMovies/>} */}
         <Card
-      sx={{ maxWidth: 300, border:"none",}}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <CardActionArea>
-        {showVideo ? (
-          <CardMedia
-
-            component="iframe"
-            width="100%"
-            height="180"
-            src="https://www.youtube.com/embed/TcMBFSGVi1c?autoplay=1"
-            title="Trailer"
-            autoPlay
-            muted
-          />
-        ) : (
-          <CardMedia
-            component="img"
-            height="460"
-            image="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg"
-            alt="poster"
-          />
-        )}
-        {showVideo ? (
-          <div>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div" sx={{paddingLeft:'5px'}}>
-                   Avengers Endgame
-              </Typography>
-              <Typography gutterBottom variant="h6" component="div" sx={{paddingLeft:'5px'}}>
-                   PG-13
-              </Typography>
-              <Rating name="read-only" value={4.2} readOnly precision={0.1} sx={{paddingBottom:'10px'}}/>
-              <Typography variant="body1">After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions.</Typography>
-              
-            </CardContent>
-          </div>
-        ) : null}
-      </CardActionArea>
-    </Card>
-    </Box>
-    
+          sx={{ 
+            width:300, 
+            border: "none",
+            transform: showVideo ? "scale(1.05)" : "scale(1)", // update scale for card enlargement on hover
+            transition: "transform 0.3s ease-in-out" // add transition for smooth animation
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <CardActionArea>
+            {showVideo ? (
+              <CardMedia
+                component="iframe"
+                width="100%"
+                height="180"
+                {...url = props.movie.movieTrailer}
+                {...embedded_url = url.replace("https://youtu.be/", "https://www.youtube.com/embed/")}
+                src={embedded_url}
+                title="Trailer"
+                muted
+                autoPlay
+              />
+            ) : (
+              <CardMedia
+                component="img"
+                height="460"
+                image={props.movie.moviePoster}
+                alt="poster"
+              />
+            )}
+            {showVideo ? (
+              <div>
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    sx={{ paddingLeft: "5px" }}
+                  >
+                    {props.movie.title}
+                  </Typography>
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="div"
+                    sx={{ paddingLeft: "5px" }}
+                  >
+                    {props.movie.duration}
+                  </Typography>
+                  <Rating
+                    name="read-only"
+                    value={4.2}
+                    readOnly
+                    precision={0.1}
+                    sx={{ paddingBottom: "10px" }}
+                  />
+                  <Typography variant="body1">
+                  {props.movie.description}
+                  </Typography>
+                </CardContent>
+              </div>
+            ) : null}
+          </CardActionArea>
+        </Card>
+    </>
   );
 }
 // import React, { useEffect, useState } from "react";

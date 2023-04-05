@@ -9,6 +9,7 @@ import ResultSkel from './components/resultskel';
 import CompForMoviePreview from './components/moviePrev_Res';
 import GroupedReviews from './components/movieDetails_Res';
 import MoviePreview from './components/moviepreview';
+import NoMovies from './components/nomovies';
 import AdvancedSearchTest from './components/advancedsearchtesting'
 import GetMovieReviewCache from './components/moviereviewcache';
 
@@ -55,16 +56,18 @@ export default class App extends React.Component {
                 {
                     <div>
                         {/* <CompForMoviePreview /> */}
-                        <MoviePreview></MoviePreview>
+                        
                     </div>
+                    
 
                 }
                 {
                     <div>
-                        <GroupedReviews />
+                        {/* <GroupedReviews /> */}
                     </div>
 
                 }
+
                 {/*
                     <div>
                         <AdvancedSearchTest />
