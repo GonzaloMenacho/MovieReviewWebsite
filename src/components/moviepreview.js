@@ -60,7 +60,7 @@ const styles = {
             height="180"
             src="https://www.youtube.com/embed/TcMBFSGVi1c?autoplay=1"
             title="Trailer"
-            autoplay
+            autoPlay
             muted
           />
         ) : (
