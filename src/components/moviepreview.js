@@ -79,7 +79,7 @@ export default function MoviePreview(props) {
                   </Typography>
                   <Rating
                     name="read-only"
-                    value={4.2}
+                    value={props.movie.movieIMDbRating / 2}
                     readOnly
                     precision={0.1}
                     sx={{ paddingBottom: "10px" }}

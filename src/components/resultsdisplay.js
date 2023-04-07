@@ -28,9 +28,24 @@ class ResultsDisplay extends React.Component {
       movieposts: [],
       reviewposts: [],
     };
+    
   }
 
+  
+
   render() {
+
+    const { movieposts, reviewposts } = this.props;
+
+
+    if (!movieposts || movieposts.length === 0) {
+      return null; // if there are no movieposts
+    }
+
+
+    if (!reviewposts || reviewposts.length === 0) {
+      return <NoMovies />; // if there are no reviews
+    }
     return (
       this.props.movieposts && (
         <div className="results-display">
