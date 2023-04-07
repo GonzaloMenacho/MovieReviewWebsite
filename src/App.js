@@ -10,6 +10,8 @@ import CompForMoviePreview from './components/moviePrev_Res';
 import GroupedReviews from './components/movieDetails_Res';
 import MoviePreview from './components/moviepreview';
 import NoMovies from './components/nomovies';
+import AdvancedSearchTest from './components/advancedsearchtesting'
+import GetMovieReviewCache from './components/moviereviewcache';
 
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
@@ -32,6 +34,9 @@ export default class App extends React.Component {
 
             
             <div className="app">
+                {
+                    <GetMovieReviewCache />
+                }
                 <div className="nav-bar">
                     <Navbar />
                 </div>
@@ -39,12 +44,6 @@ export default class App extends React.Component {
                 {
                 <div className="get-review">
                     <SearchBar />
-                </div>
-                }
-
-                {
-                <div className="results-display">
-                    <ResultsDisplay />
                 </div>
                 }
 
@@ -69,6 +68,11 @@ export default class App extends React.Component {
 
                 }
 
+                {/*
+                    <div>
+                        <AdvancedSearchTest />
+                    </div>
+                */}
             </div>
         )
     }
