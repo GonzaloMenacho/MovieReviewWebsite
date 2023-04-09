@@ -3,7 +3,7 @@ import axios from "axios";
 import ResultsDisplay from "./resultsdisplay";
 
 const client = axios.create({
-  baseURL: "http://localhost:5001/api/",
+  baseURL: "https://localhost:7035/api/",
   header: { "X-Custom-Header": "foobar" },
 });
 
@@ -63,21 +63,23 @@ class SearchBar extends React.Component {
     // example api route = 'https://localhost:7035/api/Movies/search?term=avengers'
     getReviews = async () => {
         // Find as many relevant reviews using a Regex search
-        await client.get(`Movies/search?term=${this.state.searchterm}`).then((response) => {
-            var data = response.data;
+        try {
+            await client.get(`Movies/search?term=${this.state.searchterm}`).then((response) => {
+                var data = response.data;
 
-            // save the MovieReview object into easily accessible state variables
-            this.setState({
-                movieposts: data.movieDocuments,        // list<movies>
-                reviewposts: data.reviewDocuments,      // list<list<reviews>>
-            })
+                // save the MovieReview object into easily accessible state variables
+                this.setState({
+                    movieposts: data.movieDocuments,        // list<movies>
+                    reviewposts: data.reviewDocuments,      // list<list<reviews>>
+                })
 
-            /*
-            console.log(data)
-            console.log(this.state.movieDocuments)
-            console.log(this.state.reviewDocuments)
-            */
-        });
+                sessionStorage.setItem('MovieDocuments', JSON.stringify(data.movieDocuments));
+                sessionStorage.setItem('ReviewDocuments', JSON.stringify(data.reviewDocuments));
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 }
 
