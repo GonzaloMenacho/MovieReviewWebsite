@@ -7,7 +7,7 @@ import Navbar from './components/navbar';
 import './App.css';
 import ResultSkel from './components/resultskel';
 import CompForMoviePreview from './components/moviePrev_Res';
-import GroupedReviews from './components/movieDetails_Res';
+import GroupedMovieReviews from './components/movieDetails_Res';
 import MoviePreview from './components/moviepreview';
 import NoMovies from './components/nomovies';
 import AdvancedSearchTest from './components/advancedsearchtesting'
@@ -62,11 +62,13 @@ export default class App extends React.Component {
                 
 
 
-                {/*
+                {
                     <div>
-                        <AdvancedSearchTest />
+                        <GroupedMovieReviews />
+                        <GroupedMovieReviews />
+
                     </div>
-                */}
+                }
             </div>
         )
             
