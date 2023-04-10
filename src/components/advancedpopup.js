@@ -91,6 +91,7 @@ export default function AdvancedPopup() {
                     sessionStorage.setItem('MovieDocuments', JSON.stringify(data.movieDocuments));
                     sessionStorage.setItem('ReviewDocuments', JSON.stringify(data.reviewDocuments));
                 });
+            handleClose();
         } catch (error) {
             console.log(error);
         }
