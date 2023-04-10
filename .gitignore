@@ -26,3 +26,5 @@ yarn-error.log*
 /.vs/MovieReviewWebsite/v17/
 /obj/Debug/
 /moviereviewwebsite.esproj.user
+/.vs/MovieReviewWebsite/v17/.suo
+/.vs/MovieReviewWebsite/DesignTimeBuild/.dtbcache.v2
