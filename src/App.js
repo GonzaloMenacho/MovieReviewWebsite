@@ -7,7 +7,7 @@ import Navbar from './components/navbar';
 import './App.css';
 import ResultSkel from './components/resultskel';
 import CompForMoviePreview from './components/moviePrev_Res';
-import GroupedReviews from './components/movieDetails_Res';
+import ReviewGroup from './components/movieDetails_Res';
 
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
@@ -52,18 +52,29 @@ export default class App extends React.Component {
                     </div>
                 */}
 
-                {
+                {/*
                     <div>
                         <CompForMoviePreview />
                     </div>
 
-                }
-                {
+            */}
+                <div>{
+                <div>
                     <div>
-                        <GroupedReviews />
+                        <ReviewGroup />
                     </div>
+                </div>
 
-                }
+                }</div>
+
+                <div>{
+                <div>
+                    <div>
+                        <ReviewGroup />
+                    </div>
+                </div>
+
+                }</div>
             </div>
         )
     }
