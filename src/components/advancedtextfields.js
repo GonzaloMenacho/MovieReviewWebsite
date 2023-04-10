@@ -16,7 +16,7 @@ function AdvancedTextField({ textValues, handleTextChange }) {
       <ListItem input>
       <TextField
         variant="standard"
-        label="Review Keyowrd"
+        label="Review Keyword"
         value={textValues[1]}
         onChange={(e) => handleTextChange(e, 1)}
         helperText="e.g. Very funny "

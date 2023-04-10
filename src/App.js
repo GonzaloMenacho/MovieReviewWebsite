@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ResultsDisplay from './components/resultsdisplay';
 import Title from './components/banner';
-import SearchBar from './components/searchreviewusingmovie';
+import SearchBar from './components/searchbar';
 import Navbar from './components/navbar';
 import './App.css';
 import ResultSkel from './components/resultskel';
 import CompForMoviePreview from './components/moviePrev_Res';
-import ReviewGroup from './components/movieDetails_Res';
+import GroupedReviews from './components/movieDetails_Res';
+import MoviePreview from './components/moviepreview';
+import NoMovies from './components/nomovies';
+import AdvancedSearchTest from './components/advancedsearchtesting'
+import GetMovieReviewCache from './components/moviereviewcache';
+import FormTest from './components/formtest';
 
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
@@ -30,6 +35,9 @@ export default class App extends React.Component {
 
             
             <div className="app">
+                {
+                    <GetMovieReviewCache />
+                }
                 <div className="nav-bar">
                     <Navbar />
                 </div>
@@ -40,12 +48,11 @@ export default class App extends React.Component {
                 </div>
                 }
 
-                {
-                <div className="results-display">
-                    <ResultsDisplay />
+                {/*
+                <div className="FormTest">
+                    <FormTest />
                 </div>
-                }
-
+                */}
                 {/*
                     <div className="results-skel">
                         <ResultSkel />
@@ -54,27 +61,24 @@ export default class App extends React.Component {
 
                 {/*
                     <div>
-                        <CompForMoviePreview />
+                        {/* <CompForMoviePreview /> */}
+                        
                     </div>
+                    
 
-            */}
-                <div>{
-                <div>
+                }
+                {
                     <div>
-                        <ReviewGroup />
+                        {/* <GroupedReviews /> */}
                     </div>
-                </div>
 
-                }</div>
+                }
 
-                <div>{
-                <div>
+                {/*
                     <div>
-                        <ReviewGroup />
+                        <AdvancedSearchTest />
                     </div>
-                </div>
-
-                }</div>
+                */}
             </div>
         )
     }

@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 import ResultsDisplay from "./resultsdisplay";
-import AdvancedBtn from "./advancedbtn";
-import AdvancedPopup from "./advancedpopup";
 
 const client = axios.create({
   baseURL: "https://localhost:7035/api/",
@@ -19,6 +17,7 @@ class SearchBar extends React.Component {
             reviewposts: []
         };
     }
+
 
     render() {
         return (
@@ -50,8 +49,6 @@ class SearchBar extends React.Component {
     }
 
 
-
-
     // updates the input field when something is being typed
     changeValue = (event) => {
         this.setState({
@@ -62,44 +59,28 @@ class SearchBar extends React.Component {
 
 
     // This function takes the variable in the search term, 
-    // searches for relevant movies, then searches for relevant reviews.
-    // example api route = 'https://localhost:7035/api/Movies/title?m_title=avengers'
-    getReviews = () => {
+    // searches for relevant movies and reviews.
+    // example api route = 'https://localhost:7035/api/Movies/search?term=avengers'
+    getReviews = async () => {
         // Find as many relevant reviews using a Regex search
-        client.get(`Movies/title?m_title=${this.state.searchterm}`).then((response) => {
-            var data = response.data;
+        try {
+            await client.get(`Movies/search?term=${this.state.searchterm}`).then((response) => {
+                var data = response.data;
 
-            // for each movie, find 10 reviews and save into a list
-            // reviewlist = [[reviewlist1], [reviewlist2], [reviewlist3]...[reviewlistN]]
-            var reviewlist = [];
-            data.forEach(   // loop through each movie in the movieposts state variable
-                d => {
-                    this.fetchData(d.movieID)   // grab the response data
-                        .then((reviewresponse) => {
-                            //console.log(reviewresponse);  // to see the response
-                            reviewlist.push(reviewresponse);    // add the data to the reviewlist
-                        });
-                }
-            )
+                // save the MovieReview object into easily accessible state variables
+                this.setState({
+                    movieposts: data.movieDocuments,        // list<movies>
+                    reviewposts: data.reviewDocuments,      // list<list<reviews>>
+                })
 
-            // save the review list to the reviewposts state variable
-            this.setState({
-                movieposts: data,   // save the movie json list into movieposts
-                reviewposts: reviewlist,
-            })
+                sessionStorage.setItem('MovieDocuments', JSON.stringify(data.movieDocuments));
+                sessionStorage.setItem('ReviewDocuments', JSON.stringify(data.reviewDocuments));
+            });
+        } catch (error) {
+            console.log(error);
+        }
 
-            //console.log(reviewlist)
-            //console.log(this.state.reviewposts);
-        });
     }
-
-  // this function returns a list of reviews based on the movieID passed in
-  fetchData = async (movieID) => {
-    return client.get(`Reviews/id=${movieID}`).then((response) => {
-      //console.log(response.data); // this should be an array of reviews
-      return response.data;
-    });
-  };
 }
 
 export default SearchBar;
