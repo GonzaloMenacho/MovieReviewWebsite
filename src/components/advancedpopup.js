@@ -28,7 +28,7 @@ export default function AdvancedPopup() {
     const [movieposts, setMoviePosts] = React.useState([]);
     const [reviewposts, setReviewPosts] = React.useState([]);
     const [open, setOpen] = React.useState(false);
-    const [textValues, setTextValues] = React.useState(["", ""]);
+    const [textValues, setTextValues] = React.useState([null, null]);
     const [contentRating, setContentRating] = React.useState(
         Array.from({ length: 7 }, () => false)
     );
@@ -47,7 +47,7 @@ export default function AdvancedPopup() {
     };
 
     const handleReset = () => {
-        setTextValues(["", ""]);
+        setTextValues([null, null]);
         setContentRating(Array.from({ length: 7 }, () => false));
         setGenre(Array.from({ length: 6 }, () => false));
         setMinValue(0);
@@ -80,7 +80,9 @@ export default function AdvancedPopup() {
 
     const handleSubmit = async () => {
         let formInfo = {
-            movieTitle: null
+            movieTitle: textValues[0],
+            reviewBody: textValues[1],
+            reviewTitle: textValues[1]      //ISSUE HERE: if we pass this in for both, then it needs that word present in both the title and the body
         };
         try {
             await client.post('Movies/advanced-search', formInfo)
