@@ -12,6 +12,7 @@ import MoviePreview from './components/moviepreview';
 import NoMovies from './components/nomovies';
 import AdvancedSearchTest from './components/advancedsearchtesting'
 import GetMovieReviewCache from './components/moviereviewcache';
+import FormTest from './components/formtest';
 
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
@@ -47,6 +48,11 @@ export default class App extends React.Component {
                 </div>
                 }
 
+                {/*
+                <div className="FormTest">
+                    <FormTest />
+                </div>
+                */}
                 {/*
                     <div className="results-skel">
                         <ResultSkel />
