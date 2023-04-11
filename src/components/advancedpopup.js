@@ -47,7 +47,7 @@ export default function AdvancedPopup() {
     };
 
     const handleReset = () => {
-        setTextValues([null, null]);
+        setTextValues(["", ""]).then(setTextValues([null, null]));
         setContentRating(Array.from({ length: 7 }, () => false));
         setGenre(Array.from({ length: 6 }, () => false));
         setMinValue(0);
