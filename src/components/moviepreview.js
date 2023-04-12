@@ -95,36 +95,3 @@ export default function MoviePreview(props) {
     </>
   );
 }
-// import React, { useEffect, useState } from "react";
-// import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-// import Typography from '@mui/material/Typography';
-// import { getMovieReviewCache } from './moviereviewcache';
-
-// const MovieReviews = () => {
-//   const [movieReviews, setMovieReviews] = useState([]);
-
-//   useEffect(() => {
-//     async function fetchMovieReviews() {
-//       const data = await getMovieReviewCache();
-//       setMovieReviews(Object.entries(data)); // convert the object into an array of key-value pairs
-//     }
-//     fetchMovieReviews();
-//   }, []);
-
-//   return (
-//     <div>
-//       {movieReviews.map(([movieId, review]) => (
-//         <Card key={movieId}>
-//           <CardContent>
-//             <Typography variant="h5"></Typography>
-//             <Typography variant="subtitle1">{review.author}</Typography>
-//             <Typography variant="body1">{review.content}</Typography>
-//           </CardContent>
-//         </Card>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default MovieReviews;
