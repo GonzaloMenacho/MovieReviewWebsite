@@ -34,15 +34,16 @@ class ResultsDisplay extends React.Component {
         //console.log(JSON.stringify(movieposts));
         //console.log(JSON.stringify(reviewposts));
 
+
         if (JSON.stringify(movieposts) != localStorage.getItem('MovieDocuments')) {
             if (!reviewposts || reviewposts.length === 0) {
                 return (<NoMovies />); // if there are no reviews
             }
-
             if (!movieposts || movieposts.length === 0) {
                 return null; // if there are no movieposts
             }
         }
+
 
     return (
         movieposts &&

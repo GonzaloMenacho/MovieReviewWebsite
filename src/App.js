@@ -81,17 +81,17 @@ export default class App extends React.Component {
                     </div>
                 }
 
-                {
+                {/*
                     <Container maxWidth="xl" sx={{ paddingTop: "30px" }}>
                         <MovieReviewList />
                     </Container>
-                }
+                */}
 
-                {/*
+                {
                     <MovieReviewContext.Provider value={this.state}>
                         <ResultsDisplay />
                     </MovieReviewContext.Provider>
-                */}
+                }
 
                 {/*
                 <div className="FormTest">
