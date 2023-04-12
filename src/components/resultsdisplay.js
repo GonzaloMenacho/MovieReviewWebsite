@@ -4,7 +4,6 @@ import MoviePreview from "./moviepreview";
 import Box from "@mui/material/Box";
 import NoMovies from "./nomovies";
 
-
 const styles = {
   container: {
     display: "flex",
