@@ -14,54 +14,91 @@ import NoMovies from './components/nomovies';
 import AdvancedSearchTest from './components/advancedsearchtesting'
 import GetMovieReviewCache from './components/moviereviewcache';
 import FormTest from './components/formtest';
+import { MovieReviewContext } from './Context/movie-review-context'
 import CarouselComponent from "./components/carouselcomponent";
 import { Box } from "@mui/material";
 import Container from "@mui/material/Container";
 import MovieReviewList from "./components/moviereviewlist";
-
 
 const client = axios.create({
   baseURL: "https://localhost:7035/api/",
   header: { "X-Custom-Header": "foobar" },
 });
 
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+        this.state = {
+            movieposts: [],
+            reviewposts: [],
+        };
 
-    this.state = {
-      movieposts: [],
-      reviewposts: [],
-    };
-  }
+        this.handleMoviePostChange = this.handleMoviePostChange.bind(this);
+        this.handleReviewPostChange = this.handleReviewPostChange.bind(this);
+    }
 
-  render() {
-    return (
-      <div className="app">
-        <div className="nav-bar">
-          <Navbar />
-        </div>
+    handleMoviePostChange(moviepost) {
+        this.setState({
+            movieposts: moviepost
+        });
+    }
 
-        {
-          <div className="get-review">
-            <SearchBar />
-          </div>
-        }
+    handleReviewPostChange(reviewpost) {
+        this.setState({
+            reviewposts: reviewpost
+        });
+    }
 
-        {
-          <div>
-            <Container sx={{ paddingTop: "30px" }}>
-              <CarouselComponent></CarouselComponent>
-            </Container>
-          </div>
-        }
-        {
-          <Container maxWidth="xl"  sx={{ paddingTop: "30px" }}>
-            <MovieReviewList />
-          </Container>
-        }
+    render() {
+        return (
+            <div className="app">
+                {
+                    <MovieReviewContext.Provider value={this.state}>
+                        <GetMovieReviewCache
+                            onMoviePostChange={this.handleMoviePostChange}
+                            onReviewPostChange={this.handleReviewPostChange}
+                        />
+                    </MovieReviewContext.Provider>
+                }
+                <div className="nav-bar">
+                    <Navbar />
+                </div>
 
-        {/*
+                {
+                <MovieReviewContext.Provider value={this.state}>
+                        <SearchBar
+                            onMoviePostChange={this.handleMoviePostChange}
+                            onReviewPostChange={this.handleReviewPostChange}
+                        />
+                        <ResultsDisplay />
+                </MovieReviewContext.Provider>
+                /*
+                <div className="get-review">
+                    <SearchBar />
+                </div>
+                */
+                }
+                
+                {
+                  <div>
+                    <Container sx={{ paddingTop: "30px" }}>
+                      <CarouselComponent></CarouselComponent>
+                    </Container>
+                  </div>
+                }
+                {
+                  <Container maxWidth="xl"  sx={{ paddingTop: "30px" }}>
+                    <MovieReviewList />
+                  </Container>
+                }
+                
+                {/*
+                <div className="FormTest">
+                    <FormTest />
+                </div>
+                */}
+                {/*
                     <div className="results-skel">
                         <ResultSkel />
                     </div>

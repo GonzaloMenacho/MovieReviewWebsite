@@ -168,12 +168,14 @@ export default function AdvancedPopup() {
                     </Box>
                 </List>
             </Dialog>
-            <div className="results">
-                <ResultsDisplay
-                    movieposts={movieposts}
-                    reviewposts={reviewposts}
-                />
-            </div>
+            {/*
+                <div className="results">
+                    <ResultsDisplay
+                        movieposts={movieposts}
+                        reviewposts={reviewposts}
+                    />
+                </div>
+            */}
         </div>
     );
 }

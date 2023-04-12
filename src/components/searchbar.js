@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { MovieReviewContext } from '../Context/movie-review-context';
 import axios from "axios";
 import ResultsDisplay from "./resultsdisplay";
 
@@ -10,42 +11,25 @@ const client = axios.create({
 class SearchBar extends React.Component {
     constructor(props) {
         super(props);
+        //this.handleMoviePostInputChange = this.handleMovieTitleInputChange.bind(this);
+        //this.handleReviewPostInputChange = this.handleReviewPostInputChange.bind(this);
+        //this.getReviews = this.getReviews.bind(this);
 
         this.state = {
             searchterm: "",
+            /*
             movieposts: [],
             reviewposts: []
+            */
         };
     }
 
+    handleMoviePostInputChange(event) {
+        this.props.onMoviePostChange(event.target.value);
+    }
 
-    render() {
-        return (
-            <>
-                <div className="search">
-                    <div className="search-field">
-                        <input
-                            className="search-bar"
-                            onChange={this.changeValue}
-                            type="text"
-                            placeholder="Search a Movie..."
-                            name="searchbar"
-                            value={this.state.searchterm}
-                        />
-                        
-                        <button className="search-button" onClick={this.getReviews}>
-                            Search
-                        </button>
-                    </div>
-                </div>
-                <div className="results">
-                    <ResultsDisplay
-                        movieposts={this.state.movieposts}
-                        reviewposts={this.state.reviewposts}
-                    />
-                </div>
-            </>
-        );
+    handleReviewPostInputChange(event) {
+        this.props.onReviewPostChange(event.target.value);
     }
 
 
@@ -68,18 +52,56 @@ class SearchBar extends React.Component {
                 var data = response.data;
 
                 // save the MovieReview object into easily accessible state variables
+                /*
                 this.setState({
                     movieposts: data.movieDocuments,        // list<movies>
                     reviewposts: data.reviewDocuments,      // list<list<reviews>>
                 })
+                */
+                console.log(JSON.stringify(data.movieDocuments));
+                console.log(JSON.stringify(data.reviewDocuments));
 
-                sessionStorage.setItem('MovieDocuments', JSON.stringify(data.movieDocuments));
-                sessionStorage.setItem('ReviewDocuments', JSON.stringify(data.reviewDocuments));
+                this.handleMoviePostInputChange({ target: { value: data.movieDocuments } });
+                this.handleReviewPostInputChange({ target: { value: data.reviewDocuments } });
+                //sessionStorage.setItem('MovieDocuments', JSON.stringify(data.movieDocuments));
+                //sessionStorage.setItem('ReviewDocuments', JSON.stringify(data.reviewDocuments));
             });
         } catch (error) {
             console.log(error);
         }
 
+    }
+
+
+    render() {
+        return (
+            <>
+                <div className="search">
+                    <div className="search-field">
+                        <input
+                            className="search-bar"
+                            onChange={this.changeValue}
+                            type="text"
+                            placeholder="Search a Movie..."
+                            name="searchbar"
+                            value={this.state.searchterm}
+                        />
+                        
+                        <button className="search-button" onClick={this.getReviews}>
+                            Search
+                        </button>
+                    </div>
+                </div>
+                {/*
+                    <div className="results">
+                        <ResultsDisplay
+                            movieposts={this.state.movieposts}
+                            reviewposts={this.state.reviewposts}
+                        />
+                    </div>
+                */}
+            </>
+        );
     }
 }
 

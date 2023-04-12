@@ -10,28 +10,39 @@ const client = axios.create({
 export default class GetMovieReviewCache extends React.Component {
   constructor(props) {
     super(props);
+        this.state = {
+            movieposts: "",
+            reviewposts: ""
+        };
+    }
 
-    this.state = {
-      movieposts: "",
-      reviewposts: "",
-    };
-  }
+    handleMoviePostInputChange(event) {
+        this.props.onMoviePostChange(event.target.value);
+    }
 
-  async componentDidMount() {
-    try {
-      await client.get("Movies/initialize-cache").then((response) => {
-        var data = response.data;
-        this.setState({
-          movieposts: JSON.stringify(data.movieDocuments),
-          reviewposts: JSON.stringify(data.reviewDocuments),
-        });
-        localStorage.setItem("MovieDocuments", this.state.movieposts);
-        localStorage.setItem("ReviewDocuments", this.state.reviewposts);
-        console.log(localStorage.getItem("MovieDocuments"));
-        console.log(localStorage.getItem("ReviewDocuments"));
-      });
-    } catch (error) {
-      console.log(error);
+    handleReviewPostInputChange(event) {
+        this.props.onReviewPostChange(event.target.value);
+    }
+
+    async componentDidMount() {
+        try {
+            await client.get('Movies/initialize-cache')
+                .then(response => {
+                    var data = response.data
+                    this.setState({
+                        movieposts: JSON.stringify(data.movieDocuments),
+                        reviewposts: JSON.stringify(data.reviewDocuments)
+                    })
+                    localStorage.setItem('MovieDocuments', this.state.movieposts);
+                    localStorage.setItem('ReviewDocuments', this.state.reviewposts);
+                    //console.log(localStorage.getItem('MovieDocuments'));
+                    //console.log(localStorage.getItem('ReviewDocuments'));
+                    this.handleMoviePostInputChange({ target: { value: data.movieDocuments } });
+                    this.handleReviewPostInputChange({ target: { value: data.reviewDocuments } })
+                })
+        } catch (error) {
+            console.log(error);
+        }
     }
   }
 
