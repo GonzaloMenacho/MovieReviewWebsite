@@ -62,7 +62,10 @@ export default class App extends React.Component {
                     </MovieReviewContext.Provider>
                 }
                 <div className="nav-bar">
-                    <Navbar />
+                    <Navbar
+                        onMoviePostChange={this.handleMoviePostChange}
+                        onReviewPostChange={this.handleReviewPostChange}
+                    />
                 </div>
                 <div className="searchbar">
                     <MovieReviewContext.Provider value={this.state}>
