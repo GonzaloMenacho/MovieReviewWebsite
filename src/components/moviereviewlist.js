@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MoviePreview from "./moviepreview";
 import Box from "@mui/material/Box";
-import GetMovieReviewCache from "./moviereviewcache";
 
 function MovieReviewList() {
   const [movies, setMovies] = useState([]);
@@ -14,7 +13,7 @@ function MovieReviewList() {
       padding: "3%",
       flexWrap: "wrap",
       "& > :not(style)": {
-        m: 1,
+        m: 2,
         width: 300,
         height: 460,
       },
@@ -22,14 +21,12 @@ function MovieReviewList() {
   };
 
   useEffect(() => {
-    const cacheData = localStorage.getItem("MovieReviewCache");
-    console.log(cacheData)
+    const cacheData = localStorage.getItem("MovieDocuments");
     if (cacheData) {
       const parsedData = JSON.parse(cacheData);
       // returns an array of the values of the properties in parsedData
-      const reviewsArray = Object.values(parsedData).flat();
-      console.log(reviewsArray); //  flat flattens this array of arrays into a single array
-      setMovies(reviewsArray);
+      const movies = Object.values(parsedData).flat();
+      setMovies(movies);
     }
   }, []);
 
@@ -37,7 +34,8 @@ function MovieReviewList() {
     <>
       <Box sx={styles.container}>
         {movies.map((movie) => (
-          <MoviePreview key={movie.id} movie={movie} />
+          <MoviePreview key={movie.movieID} movie={movie} />
+      
         ))}
       </Box>
     </>

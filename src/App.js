@@ -53,7 +53,7 @@ export default class App extends React.Component {
           </div>
         }
         {
-          <Container sx={{ paddingTop: "30px" }}>
+          <Container maxWidth="xl"  sx={{ paddingTop: "30px" }}>
             <MovieReviewList />
           </Container>
         }
