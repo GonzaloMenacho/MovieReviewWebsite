@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { MovieReviewContext } from '../Context/movie-review-context';
 import MoviePreview from "./moviepreview";
 import Box from "@mui/material/Box";
 
 function MovieReviewList() {
+  const { moviePosts, reviewPosts } = useContext(MovieReviewContext);
   const [movies, setMovies] = useState([]);
 
   const styles = {
@@ -29,6 +31,12 @@ function MovieReviewList() {
       setMovies(movies);
     }
   }, []);
+
+  /*
+    useEffect(() => {
+        setMovies(moviePosts);
+    }, [moviePosts]);
+    */
 
   return (
     <>

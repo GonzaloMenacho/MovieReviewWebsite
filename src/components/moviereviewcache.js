@@ -38,15 +38,14 @@ export default class GetMovieReviewCache extends React.Component {
                     //console.log(localStorage.getItem('MovieDocuments'));
                     //console.log(localStorage.getItem('ReviewDocuments'));
                     this.handleMoviePostInputChange({ target: { value: data.movieDocuments } });
-                    this.handleReviewPostInputChange({ target: { value: data.reviewDocuments } })
+                    //this.handleReviewPostInputChange({ target: { value: data.reviewDocuments } })
                 })
         } catch (error) {
             console.log(error);
         }
     }
-  }
-
-  render() {
-    return <div className="movie-review-cache"></div>;
-  }
+    render() {
+        return (<div className="movie-review-cache"></div>);
+    }
 }
+

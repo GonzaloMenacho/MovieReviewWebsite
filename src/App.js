@@ -64,67 +64,67 @@ export default class App extends React.Component {
                 <div className="nav-bar">
                     <Navbar />
                 </div>
+                <div className="searchbar">
+                    <MovieReviewContext.Provider value={this.state}>
+                    <SearchBar
+                        onMoviePostChange={this.handleMoviePostChange}
+                        onReviewPostChange={this.handleReviewPostChange}
+                        />
+                    </MovieReviewContext.Provider>
+                </div>
 
                 {
-                <MovieReviewContext.Provider value={this.state}>
-                        <SearchBar
-                            onMoviePostChange={this.handleMoviePostChange}
-                            onReviewPostChange={this.handleReviewPostChange}
-                        />
-                        <ResultsDisplay />
-                </MovieReviewContext.Provider>
-                /*
-                <div className="get-review">
-                    <SearchBar />
-                </div>
-                */
+                    <div>
+                        <Container sx={{ paddingTop: "30px" }}>
+                            <CarouselComponent></CarouselComponent>
+                        </Container>
+                    </div>
                 }
-                
+
                 {
-                  <div>
-                    <Container sx={{ paddingTop: "30px" }}>
-                      <CarouselComponent></CarouselComponent>
+                    <Container maxWidth="xl" sx={{ paddingTop: "30px" }}>
+                        <MovieReviewList />
                     </Container>
-                  </div>
                 }
-                {
-                  <Container maxWidth="xl"  sx={{ paddingTop: "30px" }}>
-                    <MovieReviewList />
-                  </Container>
-                }
-                
+
+                {/*
+                    <MovieReviewContext.Provider value={this.state}>
+                        <ResultsDisplay />
+                    </MovieReviewContext.Provider>
+                */}
+
                 {/*
                 <div className="FormTest">
                     <FormTest />
                 </div>
                 */}
+
                 {/*
                     <div className="results-skel">
                         <ResultSkel />
                     </div>
                 */}
 
-                {
+                {/*
                     <div>
                         <GroupedMovieReviews />
                         <GroupedMovieReviews />
 
                     </div>
-                }
-            </div>
-        )
+                */}
 
-    }
+                {/*
+                { <div>{/* <CompForMoviePreview /> /}</div> }
+                { <div>{/* <GroupedReviews /> /}</div> }
+                */}
 
-        {<div>{/* <CompForMoviePreview /> */}</div>}
-        {<div>{/* <GroupedReviews /> */}</div>}
-
-        {/*
+                {/*
                     <div>
                         <AdvancedSearchTest />
                     </div>
                 */}
-      </div>
-    );
-  }
+
+            </div>
+        );
+    }
 }
