@@ -82,7 +82,12 @@ export default function AdvancedPopup() {
         let formInfo = {
             movieTitle: textValues[0],
             reviewBody: textValues[1],
-            reviewTitle: textValues[1]      //ISSUE HERE: if we pass this in for both, then it needs that word present in both the title and the body
+            reviewTitle: textValues[1],
+
+            // also known as movieIMDbRating
+            // multiply by 2 because rating is max is 5 stars in UI
+            totalUserRatingMinMax: [minValue * 2, maxValue * 2],
+            //movieGenres: genre,
         };
         try {
             await client.post('Movies/advanced-search', formInfo)
