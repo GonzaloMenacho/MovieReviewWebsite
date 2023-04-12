@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/.vs/MovieReviewWebsite/DesignTimeBuild/.dtbcache.v2
+/.vs/MovieReviewWebsite/FileContentIndex/
+/.vs/MovieReviewWebsite/v17/
+/obj/Debug/
+/moviereviewwebsite.esproj.user
+/.vs/MovieReviewWebsite/v17/.suo
+/.vs/MovieReviewWebsite/DesignTimeBuild/.dtbcache.v2
