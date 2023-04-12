@@ -53,7 +53,7 @@ class ResultsDisplay extends React.Component {
             <div className="results-display">
               <Box sx={styles.container}>
                 {this.props.movieposts.map((movie) => (
-                  <MoviePreview key={movie.id} movie={movie} />
+                  <MoviePreview key={movie.movie.movieID} movie={movie} />
                 ))}
               </Box>
             </div>

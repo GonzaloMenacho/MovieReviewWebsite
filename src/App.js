@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import ResultsDisplay from './components/resultsdisplay';
@@ -13,54 +14,58 @@ import NoMovies from './components/nomovies';
 import AdvancedSearchTest from './components/advancedsearchtesting'
 import GetMovieReviewCache from './components/moviereviewcache';
 import FormTest from './components/formtest';
+import CarouselComponent from "./components/carouselcomponent";
+import { Box } from "@mui/material";
+import Container from "@mui/material/Container";
+import MovieReviewList from "./components/moviereviewlist";
+
 
 const client = axios.create({
-    baseURL: 'https://localhost:7035/api/',
-    header: {'X-Custom-Header': 'foobar'}
+  baseURL: "https://localhost:7035/api/",
+  header: { "X-Custom-Header": "foobar" },
 });
 
 export default class App extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            movieposts: [],
-            reviewposts: []
-        };
-    }
+    this.state = {
+      movieposts: [],
+      reviewposts: [],
+    };
+  }
 
+  render() {
+    return (
+      <div className="app">
+        <div className="nav-bar">
+          <Navbar />
+        </div>
 
-    render() {
-        return (
+        {
+          <div className="get-review">
+            <SearchBar />
+          </div>
+        }
 
-            
-            <div className="app">
-                {
-                    <GetMovieReviewCache />
-                }
-                <div className="nav-bar">
-                    <Navbar />
-                </div>
+        {
+          <div>
+            <Container sx={{ paddingTop: "30px" }}>
+              <CarouselComponent></CarouselComponent>
+            </Container>
+          </div>
+        }
+        {
+          <Container maxWidth="xl"  sx={{ paddingTop: "30px" }}>
+            <MovieReviewList />
+          </Container>
+        }
 
-                {
-                <div className="get-review">
-                    <SearchBar />
-                </div>
-                }
-
-                {/*
-                <div className="FormTest">
-                    <FormTest />
-                </div>
-                */}
-                {/*
+        {/*
                     <div className="results-skel">
                         <ResultSkel />
                     </div>
                 */}
-
-                
-
 
                 {
                     <div>
@@ -71,6 +76,18 @@ export default class App extends React.Component {
                 }
             </div>
         )
-            
+
     }
+
+        {<div>{/* <CompForMoviePreview /> */}</div>}
+        {<div>{/* <GroupedReviews /> */}</div>}
+
+        {/*
+                    <div>
+                        <AdvancedSearchTest />
+                    </div>
+                */}
+      </div>
+    );
+  }
 }
