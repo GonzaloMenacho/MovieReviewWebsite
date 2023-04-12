@@ -12,8 +12,17 @@ export default class GetMovieReviewCache extends React.Component {
         super(props);
 
         this.state = {
-            moviereviewcache: ""
+            movieposts: "",
+            reviewposts: ""
         };
+    }
+
+    handleMoviePostInputChange(event) {
+        this.props.onMoviePostChange(event.target.value);
+    }
+
+    handleReviewPostInputChange(event) {
+        this.props.onReviewPostChange(event.target.value);
     }
 
     async componentDidMount() {
@@ -22,15 +31,19 @@ export default class GetMovieReviewCache extends React.Component {
                 .then(response => {
                     var data = response.data
                     this.setState({
-                        moviereviewcache: JSON.stringify(data)
+                        movieposts: JSON.stringify(data.movieDocuments),
+                        reviewposts: JSON.stringify(data.reviewDocuments)
                     })
-                    localStorage.setItem('MovieReviewCache', this.state.moviereviewcache);
-                    console.log(localStorage.getItem('MovieReviewCache'));
+                    localStorage.setItem('MovieDocuments', this.state.movieposts);
+                    localStorage.setItem('ReviewDocuments', this.state.reviewposts);
+                    //console.log(localStorage.getItem('MovieDocuments'));
+                    //console.log(localStorage.getItem('ReviewDocuments'));
+                    this.handleMoviePostInputChange({ target: { value: data.movieDocuments } });
+                    this.handleReviewPostInputChange({ target: { value: data.reviewDocuments } })
                 })
         } catch (error) {
             console.log(error);
         }
-
     }
 
     render() {

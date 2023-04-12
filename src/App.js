@@ -13,11 +13,13 @@ import NoMovies from './components/nomovies';
 import AdvancedSearchTest from './components/advancedsearchtesting'
 import GetMovieReviewCache from './components/moviereviewcache';
 import FormTest from './components/formtest';
+import { MovieReviewContext } from './Context/movie-review-context'
 
 const client = axios.create({
     baseURL: 'https://localhost:7035/api/',
     header: {'X-Custom-Header': 'foobar'}
 });
+
 
 export default class App extends React.Component {
     constructor(props) {
@@ -25,27 +27,54 @@ export default class App extends React.Component {
 
         this.state = {
             movieposts: [],
-            reviewposts: []
+            reviewposts: [],
         };
+
+        this.handleMoviePostChange = this.handleMoviePostChange.bind(this);
+        this.handleReviewPostChange = this.handleReviewPostChange.bind(this);
     }
 
+    handleMoviePostChange(moviepost) {
+        this.setState({
+            movieposts: moviepost
+        });
+    }
+
+    handleReviewPostChange(reviewpost) {
+        this.setState({
+            reviewposts: reviewpost
+        });
+    }
 
     render() {
         return (
-
-            
             <div className="app">
                 {
-                    <GetMovieReviewCache />
+                    <MovieReviewContext.Provider value={this.state}>
+                        <GetMovieReviewCache
+                            onMoviePostChange={this.handleMoviePostChange}
+                            onReviewPostChange={this.handleReviewPostChange}
+                        />
+                    </MovieReviewContext.Provider>
                 }
                 <div className="nav-bar">
                     <Navbar />
                 </div>
 
                 {
+                <MovieReviewContext.Provider value={this.state}>
+                        <SearchBar
+                            onMoviePostChange={this.handleMoviePostChange}
+                            onReviewPostChange={this.handleReviewPostChange}
+                        />
+                        <ResultsDisplay />
+                </MovieReviewContext.Provider>
+                /*
+                
                 <div className="get-review">
                     <SearchBar />
                 </div>
+                */
                 }
 
                 {/*
