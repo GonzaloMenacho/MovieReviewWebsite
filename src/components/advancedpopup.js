@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useContext } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import List from "@mui/material/List";
@@ -13,7 +13,6 @@ import ContentRatingCheckBoxes from "./contentratingcheckboxes";
 import AdvancedTextField from "./advancedtextfields";
 import RatingScores from "./ratingscores";
 import axios from "axios";
-import ResultsDisplay from "./resultsdisplay";
 
 const client = axios.create({
     baseURL: "https://localhost:7035/api/",
@@ -24,173 +23,213 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AdvancedPopup() {
-    const [movieposts, setMoviePosts] = React.useState([]);
-    const [reviewposts, setReviewPosts] = React.useState([]);
-    const [open, setOpen] = React.useState(false);
-    const [textValues, setTextValues] = React.useState([null, null]);
-    const [contentRating, setContentRating] = React.useState(
-        Array.from({ length: 7 }, () => false)
-    );
-    const [genre, setGenre] = React.useState(
-        Array.from({ length: 6 }, () => false)
-    );
-    const [minValue, setMinValue] = React.useState(0);
-    const [maxValue, setMaxValue] = React.useState(5);
+class AdvancedPopup extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+            textValues: [null, null],
+            contentRating: Array.from({ length: 7 }, () => false),
+            genre: Array.from({ length: 6 }, () => false),
+            minValue: 0,
+            maxValue: 5,
+        };
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+        this.handleClickOpen = this.handleClickOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleReset = this.handleReset.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
+        this.handleContentRatingChange = this.handleContentRatingChange.bind(this);
+        this.handleGenreChange = this.handleGenreChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.setMinValue = this.setMinValue.bind(this);
+        this.setMaxValue = this.setMaxValue.bind(this);
+    }
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    handleClickOpen() {
+        this.setState({ open: true });
+    }
 
-    const handleReset = () => {
-        setTextValues(["", ""]).then(setTextValues([null, null]));
-        setContentRating(Array.from({ length: 7 }, () => false));
-        setGenre(Array.from({ length: 6 }, () => false));
-        setMinValue(0);
-        setMaxValue(5);
-    };
+    handleClose() {
+        this.setState({ open: false });
+    }
 
-    const handleTextChange = (event, index) => {
-        setTextValues([
-            ...textValues.slice(0, index),
-            event.target.value,
-            ...textValues.slice(index + 1),
-        ]);
-    };
-
-    const handleContentRatingChange = (index) => (event) => {
-        setContentRating((prevValues) => {
-            const newValues = [...prevValues];
-            newValues[index] = event.target.checked;
-            return newValues;
+    handleReset() {
+        this.setState({
+            textValues: ['',''],
+            contentRating: Array.from({ length: 7 }, () => false),
+            genre: Array.from({ length: 6 }, () => false),
+            minValue: 0,
+            maxValue: 5,
         });
-    };
+    }
 
-    const handleGenreChange = (index) => (event) => {
-        setGenre((prevValues) => {
-            const newValues = [...prevValues];
-            newValues[index] = event.target.checked;
-            return newValues;
+    handleTextChange(event, index) {
+        this.setState({
+            textValues: [
+                ...this.state.textValues.slice(0, index),
+                event.target.value,
+                ...this.state.textValues.slice(index + 1),
+            ],
         });
-    };
+    }
 
-    const handleSubmit = async () => {
+    handleContentRatingChange(index) {
+        return (event) => {
+            this.setState((prevState) => {
+                const newValues = [...prevState.contentRating];
+                newValues[index] = event.target.checked;
+                return { contentRating: newValues };
+            });
+        };
+    }
+
+    handleGenreChange(index) {
+        return (event) => {
+            this.setState((prevState) => {
+                const newValues = [...prevState.genre];
+                newValues[index] = event.target.checked;
+                return { genre: newValues };
+            });
+        };
+    }
+
+    setMinValue(value) {
+        this.setState({
+            minValue: value,
+        });
+    }
+
+    setMaxValue(value) {
+        this.setState({
+            maxValue: value,
+        });
+    }
+
+    handleMoviePostInputChange(event) {
+        this.props.onMoviePostChange(event.target.value);
+    }
+
+    handleReviewPostInputChange(event) {
+        this.props.onReviewPostChange(event.target.value);
+    }
+
+    async handleSubmit() {
         var checkBoxes = new ContentRatingCheckBoxes();
         let allGenres = checkBoxes.getGenreStrings.call();
         var genreList = [];
         var i;
-        for (i = 0; i < genre.length; i++) {
-            if (genre[i]) {
+        for (i = 0; i < this.state.genre.length; i++) {
+            if (this.state.genre[i]) {
                 genreList.push(allGenres[i]);
             }
-        } 
+        }
+
+        var textFields = this.state.textValues;
+        for (i = 0; i < 2; i++) {
+            var str = textFields[i];
+            if (str !== null) {
+                if (str.length < 1) {
+                    textFields[i] = null;
+                }
+            }
+        }
 
         let formInfo = {
-            movieTitle: textValues[0],
-            reviewBody: textValues[1],
-            reviewTitle: textValues[1],
+            movieTitle: textFields[0],
+            reviewBody: textFields[1],
+            reviewTitle: textFields[1],
 
             // also known as movieIMDbRating
             // multiply by 2 because rating is max is 5 stars in UI
-            totalUserRatingMinMax: [minValue * 2, maxValue * 2],
+            totalUserRatingMinMax: [this.state.minValue * 2, this.state.maxValue * 2],
             movieGenres: genreList,
         };
         try {
             await client.post('Movies/advanced-search', formInfo)
                 .then((response) => {
                     var data = response.data;
-                    setMoviePosts(data.movieDocuments);        // list<movies>
-                    setReviewPosts(data.reviewDocuments);      // list<list<reviews>>
-                    sessionStorage.setItem('MovieDocuments', JSON.stringify(data.movieDocuments));
-                    sessionStorage.setItem('ReviewDocuments', JSON.stringify(data.reviewDocuments));
+                    this.handleMoviePostInputChange({ target: { value: data.movieDocuments } });
+                    this.handleReviewPostInputChange({ target: { value: data.reviewDocuments } });
                 });
-            handleClose();
+            this.handleClose();
         } catch (error) {
             console.log(error);
         }
     }
 
-    return (
-        <div>
-            <Button
-                variant="outlined"
-                onClick={handleClickOpen}
-                sx={{ textTransform: "Capitalize" }}
-            >
-                Advanced Search
-            </Button>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Transition}
-            >
-                <AppBar sx={{ position: "relative" }}>
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            onClick={handleClose}
-                            aria-label="close"
+    render() {
+        return (
+            <div>
+                <Button
+                    variant="outlined"
+                    onClick={this.handleClickOpen}
+                    sx={{ textTransform: "Capitalize" }}
+                >
+                    Advanced Search
+                </Button>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    TransitionComponent={Transition}
+                >
+                    <AppBar sx={{ position: "relative" }}>
+                        <Toolbar>
+                            <IconButton
+                                edge="start"
+                                color="inherit"
+                                onClick={this.handleClose}
+                                aria-label="close"
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                                Advanced Search
+                            </Typography>
+                            <Button autoFocus color="inherit" onClick={this.handleSubmit}>
+                                Search
+                            </Button>
+                            <Button autoFocus color="inherit" onClick={this.handleReset}>
+                                Reset
+                            </Button>
+                        </Toolbar>
+                    </AppBar>
+                    <List>
+                        <Box
+                            component="form"
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                m: 2,
+                                width: "fit-content",
+                            }}
+                            noValidate
+                            autoComplete="off"
                         >
-                            <CloseIcon />
-                        </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                            Advanced Search
-                        </Typography>
-                        <Button autoFocus color="inherit" onClick={handleSubmit}>
-                            Search
-                        </Button>
-                        <Button autoFocus color="inherit" onClick={handleReset}>
-                            Reset
-                        </Button>
-                    </Toolbar>
-                </AppBar>
-                <List>
-                    <Box
-                        component="form"
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            m: 2,
-                            width: "fit-content",
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    >
-                        <List>
-                            <AdvancedTextField
-                                textValues={textValues}
-                                handleTextChange={handleTextChange}
-                            />
-                            <ContentRatingCheckBoxes
-                                contentRating={contentRating}
-                                handleContentRatingChange={handleContentRatingChange}
-                                genre={genre}
-                                handleGenreChange={handleGenreChange}
-                            />
-
-                            <RatingScores
-                                minValue={minValue}
-                                maxValue={maxValue}
-                                setMinValue={setMinValue}
-                                setMaxValue={setMaxValue}
-                            />
-                        </List>
-                    </Box>
-                </List>
-            </Dialog>
-            {/*
-                <div className="results">
-                    <ResultsDisplay
-                        movieposts={movieposts}
-                        reviewposts={reviewposts}
-                    />
-                </div>
-            */}
-        </div>
-    );
+                            <List>
+                                <AdvancedTextField
+                                    textValues={this.state.textValues}
+                                    handleTextChange={this.handleTextChange}
+                                />
+                                {/*<ContentRatingCheckBoxes*/}
+                                {/*    contentRating={this.state.contentRating}*/}
+                                {/*    handleContentRatingChange={this.handleContentRatingChange}*/}
+                                {/*    genre={this.state.genre}*/}
+                                {/*    handleGenreChange={this.handleGenreChange}*/}
+                                {/*/>*/}
+                                <RatingScores
+                                    minValue={this.state.minValue}
+                                    maxValue={this.state.maxValue}
+                                    setMinValue={this.setMinValue}
+                                    setMaxValue={this.setMaxValue}
+                                />
+                            </List>
+                        </Box>
+                    </List>
+                </Dialog>
+            </div>
+        );
+    }
 }
+
+export default AdvancedPopup
