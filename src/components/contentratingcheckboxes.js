@@ -8,91 +8,103 @@ import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 
-function ContentRatingCheckBoxes({
-  contentRating,
-  handleContentRatingChange,
-  genre,
-  handleGenreChange,
-}) {
-  const ratingValues = [
-    "G",
-    "PG",
-    "PG-13",
-    "R",
-    "NC-17",
-    "Not Rated",
-    "Unrated",
-  ];
+class ContentRatingCheckBoxes extends React.Component {
+    constructor(props) {
+        super(props);
 
-  const genreValues = [
-    "Action",
-    "Horror",
-    "Romance",
-    "Drama",
-    "Thriller",
-    "Comedy",
-  ];
-  return (
-    <div>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Content Rating</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            <Grid container spacing={2}>
-              {contentRating.map((value, index) => (
-                <Grid item xs={6} key={index}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={value}
-                        onChange={handleContentRatingChange(index)}
-                      />
-                    }
-                    label={ratingValues[index]}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Genre</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            <Grid container spacing={2}>
-              {genre.map((value, index) => (
-                <Grid item xs={6} key={index}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={value}
-                        onChange={handleGenreChange(index)}
-                      />
-                    }
-                    label={genreValues[index]}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      
-    </div>
-  );
+        this.ratingValues = [
+            "G",
+            "PG",
+            "PG-13",
+            "R",
+            "NC-17",
+            "Not Rated",
+            "Unrated",
+        ];
+
+        this.genreValues = [
+            "Action",
+            "Horror",
+            "Romance",
+            "Drama",
+            "Thriller",
+            "Comedy",
+        ];
+    }
+
+    getGenreStrings = () => {
+        return this.genreValues;
+    }
+
+    render() {
+        const {
+            contentRating,
+            handleContentRatingChange,
+            genre,
+            handleGenreChange,
+        } = this.props;
+        return (
+            <div>
+                <Accordion>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >
+                        <Typography>Content Rating</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            <Grid container spacing={2}>
+                                {contentRating.map((value, index) => (
+                                    <Grid item xs={6} key={index}>
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    checked={value}
+                                                    onChange={handleContentRatingChange(index)}
+                                                />
+                                            }
+                                            label={this.ratingValues[index]}
+                                        />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >
+                        <Typography>Genre</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            <Grid container spacing={2}>
+                                {genre.map((value, index) => (
+                                    <Grid item xs={6} key={index}>
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    checked={value}
+                                                    onChange={handleGenreChange(index)}
+                                                />
+                                            }
+                                            label={this.genreValues[index]}
+                                        />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+            </div>
+        );
+    }
 }
 
 export default ContentRatingCheckBoxes;
