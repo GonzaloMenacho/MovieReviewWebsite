@@ -90,11 +90,22 @@ export default class App extends React.Component {
                     </Container>
                 */}
 
+                {<Container>
+                    <MovieReviewContext.Provider value={this.state}>
+                        <Box>
+                        
+                        
+                        </Box>
+                    </MovieReviewContext.Provider>
+                    </Container>
+                }
                 {
                     <MovieReviewContext.Provider value={this.state}>
-                        <ResultsDisplay />
                         <GroupedMovieReviews />
+                        <ResultsDisplay />
+
                     </MovieReviewContext.Provider>
+
                 }
 
                 {/*
