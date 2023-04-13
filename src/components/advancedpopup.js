@@ -212,8 +212,8 @@ class AdvancedPopup extends React.Component {
                                     handleTextChange={this.handleTextChange}
                                 />
                                 <ContentRatingCheckBoxes
-                                    {/*contentRating={this.state.contentRating}*/}
-                                    {/*handleContentRatingChange={this.handleContentRatingChange}*/}
+                                    contentRating={this.state.contentRating}
+                                    handleContentRatingChange={this.handleContentRatingChange}
                                     genre={this.state.genre}
                                     handleGenreChange={this.handleGenreChange}
                                 />
