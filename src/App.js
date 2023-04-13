@@ -8,7 +8,6 @@ import Navbar from './components/navbar';
 import './App.css';
 import ResultSkel from './components/resultskel';
 import CompForMoviePreview from './components/moviePrev_Res';
-import GroupedMovieReviews from './components/movieDetails_Res';
 import MoviePreview from './components/moviepreview';
 import NoMovies from './components/nomovies';
 import AdvancedSearchTest from './components/advancedsearchtesting'
@@ -19,9 +18,10 @@ import CarouselComponent from "./components/carouselcomponent";
 import { Box } from "@mui/material";
 import Container from "@mui/material/Container";
 import MovieReviewList from "./components/moviereviewlist";
+import GroupedMovieReviews from './components/reviewPrev';
 
 const client = axios.create({
-  baseURL: "https://localhost:7035/api/",
+  baseURL: "http://localhost:5001/api/",
   header: { "X-Custom-Header": "foobar" },
 });
 
@@ -93,6 +93,7 @@ export default class App extends React.Component {
                 {
                     <MovieReviewContext.Provider value={this.state}>
                         <ResultsDisplay />
+                        <GroupedMovieReviews />
                     </MovieReviewContext.Provider>
                 }
 
@@ -123,9 +124,9 @@ export default class App extends React.Component {
 
                 {/*
                     <div>
-                        <AdvancedSearchTest />
+                        <GroupedMovieReviews />
                     </div>
-                */}
+            */}
 
             </div>
         );
