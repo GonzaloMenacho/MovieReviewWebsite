@@ -3,12 +3,14 @@ import { MovieReviewContext } from '../Context/movie-review-context';
 import MoviePreview from "./moviepreview";
 import Box from "@mui/material/Box";
 import NoMovies from "./nomovies";
+import GroupedMovieReviews from './reviewPrev';
+
 
 const styles = {
   container: {
     display: "flex",
     alignItems: "top center",
-    height: "25vh",
+    height: "auto",
     padding: "3%",
     flexWrap: "wrap",
     "& > :not(style)": {
@@ -46,6 +48,7 @@ class ResultsDisplay extends React.Component {
 
 
     return (
+        
         movieposts &&
         <div className="results-display">
             {
@@ -55,9 +58,14 @@ class ResultsDisplay extends React.Component {
                             <MoviePreview key={movie.id} movie={movie} />
                         ))}
                     </Box>
+
+                    
                 </div>
             }
+
         </div>
+
+        
         );
     }
 }

@@ -88,25 +88,23 @@ export default class App extends React.Component {
                     <Container maxWidth="xl" sx={{ paddingTop: "30px" }}>
                         <MovieReviewList />
                     </Container>
-                */}
+            */}
 
-                {<Container>
+                { <Box>
                     <MovieReviewContext.Provider value={this.state}>
-                        <Box>
-                        
-                        
-                        </Box>
-                    </MovieReviewContext.Provider>
-                    </Container>
-                }
-                {
-                    <MovieReviewContext.Provider value={this.state}>
-                        <GroupedMovieReviews />
-                        <ResultsDisplay />
+                    <Box>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                         
+                         <ResultsDisplay />
+                         <GroupedMovieReviews />
+                    </div>
 
-                    </MovieReviewContext.Provider>
-
+                    </Box>
+                </MovieReviewContext.Provider>
+                </Box>
                 }
+
+
 
                 {/*
                 <div className="FormTest">
