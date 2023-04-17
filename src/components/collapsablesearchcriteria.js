@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 
-class ContentRatingCheckBoxes extends React.Component {
+class CollapsableSearchCriteria extends React.Component {
     constructor(props) {
         super(props);
 
@@ -45,34 +45,34 @@ class ContentRatingCheckBoxes extends React.Component {
         } = this.props;
         return (
             <div>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                    >
-                        <Typography>Content Rating</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            <Grid container spacing={2}>
-                                {contentRating.map((value, index) => (
-                                    <Grid item xs={6} key={index}>
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    checked={value}
-                                                    onChange={handleContentRatingChange(index)}
-                                                />
-                                            }
-                                            label={this.ratingValues[index]}
-                                        />
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
+                {/*<Accordion>*/}
+                {/*    <AccordionSummary*/}
+                {/*        expandIcon={<ExpandMoreIcon />}*/}
+                {/*        aria-controls="panel1a-content"*/}
+                {/*        id="panel1a-header"*/}
+                {/*    >*/}
+                {/*        <Typography>Content Rating</Typography>*/}
+                {/*    </AccordionSummary>*/}
+                {/*    <AccordionDetails>*/}
+                {/*        <Typography>*/}
+                {/*            <Grid container spacing={2}>*/}
+                {/*                {contentRating.map((value, index) => (*/}
+                {/*                    <Grid item xs={6} key={index}>*/}
+                {/*                        <FormControlLabel*/}
+                {/*                            control={*/}
+                {/*                                <Checkbox*/}
+                {/*                                    checked={value}*/}
+                {/*                                    onChange={handleContentRatingChange(index)}*/}
+                {/*                                />*/}
+                {/*                            }*/}
+                {/*                            label={this.ratingValues[index]}*/}
+                {/*                        />*/}
+                {/*                    </Grid>*/}
+                {/*                ))}*/}
+                {/*            </Grid>*/}
+                {/*        </Typography>*/}
+                {/*    </AccordionDetails>*/}
+                {/*</Accordion>*/}
                 <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
@@ -107,4 +107,4 @@ class ContentRatingCheckBoxes extends React.Component {
     }
 }
 
-export default ContentRatingCheckBoxes;
+export default CollapsableSearchCriteria;

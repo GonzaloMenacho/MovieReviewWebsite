@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { Box } from "@mui/material";
-import ContentRatingCheckBoxes from "./contentratingcheckboxes";
+import CollapsableSearchCriteria from "./collapsablesearchcriteria";
 import AdvancedTextField from "./advancedtextfields";
 import RatingScores from "./ratingscores";
 import axios from "axios";
@@ -115,7 +115,7 @@ class AdvancedPopup extends React.Component {
     }
 
     async handleSubmit() {
-        var checkBoxes = new ContentRatingCheckBoxes();
+        var checkBoxes = new CollapsableSearchCriteria();
         let allGenres = checkBoxes.getGenreStrings.call();
         var genreList = [];
         var i;
@@ -211,7 +211,7 @@ class AdvancedPopup extends React.Component {
                                     textValues={this.state.textValues}
                                     handleTextChange={this.handleTextChange}
                                 />
-                                <ContentRatingCheckBoxes
+                                <CollapsableSearchCriteria
                                     contentRating={this.state.contentRating}
                                     handleContentRatingChange={this.handleContentRatingChange}
                                     genre={this.state.genre}
