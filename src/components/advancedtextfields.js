@@ -1,6 +1,11 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import { ListItem } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function AdvancedTextField({ textValues, handleTextChange }) {
   return (
@@ -23,6 +28,25 @@ function AdvancedTextField({ textValues, handleTextChange }) {
         sx={{paddingBottom: 1 }}
       />
       </ListItem>
+          <Accordion>
+              <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
+              >
+                  <Typography>Movie Criteria</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                  <TextField
+                      variant="standard"
+                      label="Main Stars"
+                      value={textValues[2]}
+                      onChange={(e) => handleTextChange(e, 2)}
+                      helperText="e.g. Tom Hanks Tom Holland..."
+                      sx={{ paddingBottom: 1 }}
+                  />
+              </AccordionDetails>
+          </Accordion>
     </div>
   );
 }

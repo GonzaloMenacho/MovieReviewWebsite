@@ -28,7 +28,7 @@ class AdvancedPopup extends React.Component {
         super(props);
         this.state = {
             open: false,
-            textValues: [null, null],
+            textValues: [null, null, null],
             contentRating: Array.from({ length: 7 }, () => false),
             genre: Array.from({ length: 6 }, () => false),
             movieMinValue: null,
@@ -60,7 +60,7 @@ class AdvancedPopup extends React.Component {
 
     handleReset() {
         this.setState({
-            textValues: ['',''],
+            textValues: ['','', ''],
             contentRating: Array.from({ length: 7 }, () => false),
             genre: Array.from({ length: 6 }, () => false),
             movieMinValue: null,
@@ -76,6 +76,7 @@ class AdvancedPopup extends React.Component {
                 ...this.state.textValues.slice(0, index),
                 event.target.value,
                 ...this.state.textValues.slice(index + 1),
+                ...this.state.textValues.slice(index + 2),
             ],
         });
     }
@@ -150,7 +151,7 @@ class AdvancedPopup extends React.Component {
         }
 
         var textFields = this.state.textValues;
-        for (i = 0; i < 2; i++) {
+        for (i = 0; i < textFields.length; i++) {
             var str = textFields[i];
             if (str !== null) {
                 if (str.length < 1) {
@@ -164,6 +165,7 @@ class AdvancedPopup extends React.Component {
             movieTitle: textFields[0],
             reviewBody: textFields[1],
             reviewTitle: textFields[1],
+            mainStars: [textFields[2]],
 
             // also known as movieIMDbRating
             // multiply by 2 because rating is max is 5 stars in UI
