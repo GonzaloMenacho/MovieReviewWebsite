@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { Box } from "@mui/material";
-import CollapsableSearchCriteria from "./collapsablesearchcriteria";
+import Checkboxes from "./checkboxes";
 import AdvancedTextField from "./advancedtextfields";
 import RatingScores from "./ratingscores";
 import axios from "axios";
@@ -31,8 +31,10 @@ class AdvancedPopup extends React.Component {
             textValues: [null, null],
             contentRating: Array.from({ length: 7 }, () => false),
             genre: Array.from({ length: 6 }, () => false),
-            minValue: 0,
-            maxValue: 5,
+            movieMinValue: null,
+            movieMaxValue: null,
+            reviewMinValue: null,
+            reviewMaxValue: null,
         };
 
         this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -42,8 +44,10 @@ class AdvancedPopup extends React.Component {
         this.handleContentRatingChange = this.handleContentRatingChange.bind(this);
         this.handleGenreChange = this.handleGenreChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.setMinValue = this.setMinValue.bind(this);
-        this.setMaxValue = this.setMaxValue.bind(this);
+        this.setMovieMinValue = this.setMovieMinValue.bind(this);
+        this.setMovieMaxValue = this.setMovieMaxValue.bind(this);
+        this.setReviewMinValue = this.setReviewMinValue.bind(this);
+        this.setReviewMaxValue = this.setReviewMaxValue.bind(this);
     }
 
     handleClickOpen() {
@@ -59,8 +63,10 @@ class AdvancedPopup extends React.Component {
             textValues: ['',''],
             contentRating: Array.from({ length: 7 }, () => false),
             genre: Array.from({ length: 6 }, () => false),
-            minValue: 0,
-            maxValue: 5,
+            movieMinValue: null,
+            movieMaxValue: null,
+            reviewMinValue: null,
+            reviewMaxValue: null,
         });
     }
 
@@ -94,15 +100,33 @@ class AdvancedPopup extends React.Component {
         };
     }
 
-    setMinValue(value) {
+    setMovieMinValue(value) {
+        if (this.state.movieMaxValue === null) {
+            this.setMovieMaxValue(5);
+        }
         this.setState({
-            minValue: value,
+            movieMinValue: value,
         });
     }
 
-    setMaxValue(value) {
+    setMovieMaxValue(value) {
         this.setState({
-            maxValue: value,
+            movieMaxValue: value,
+        });
+    }
+
+    setReviewMinValue(value) {
+        if (this.state.reviewMaxValue === null) {
+            this.setReviewMaxValue(5);
+        }
+        this.setState({
+            reviewMinValue: value,
+        });
+    }
+
+    setReviewMaxValue(value) {
+        this.setState({
+            reviewMaxValue: value,
         });
     }
 
@@ -115,7 +139,7 @@ class AdvancedPopup extends React.Component {
     }
 
     async handleSubmit() {
-        var checkBoxes = new CollapsableSearchCriteria();
+        var checkBoxes = new Checkboxes();
         let allGenres = checkBoxes.getGenreStrings.call();
         var genreList = [];
         var i;
@@ -135,6 +159,7 @@ class AdvancedPopup extends React.Component {
             }
         }
 
+        
         let formInfo = {
             movieTitle: textFields[0],
             reviewBody: textFields[1],
@@ -142,9 +167,20 @@ class AdvancedPopup extends React.Component {
 
             // also known as movieIMDbRating
             // multiply by 2 because rating is max is 5 stars in UI
-            totalUserRatingMinMax: [this.state.minValue * 2, this.state.maxValue * 2],
-            movieGenres: genreList,
+            
+            totalUserRatingMinMax: null,
+            movieGenres: null,
         };
+
+        if (this.state.movieMinValue !== null && this.state.movieMaxValue !== null) {
+            formInfo.totalUserRatingMinMax = [this.state.movieMinValue * 2, this.state.movieMaxValue * 2];
+        }
+
+        if (genreList.length > 0) {
+            formInfo.movieGenres = genreList;
+        }
+
+
         try {
             await client.post('Movies/advanced-search', formInfo)
                 .then((response) => {
@@ -215,17 +251,25 @@ class AdvancedPopup extends React.Component {
                                     textValues={this.state.textValues}
                                     handleTextChange={this.handleTextChange}
                                 />
-                                <CollapsableSearchCriteria
+                                <Checkboxes
                                     contentRating={this.state.contentRating}
                                     handleContentRatingChange={this.handleContentRatingChange}
                                     genre={this.state.genre}
                                     handleGenreChange={this.handleGenreChange}
                                 />
                                 <RatingScores
-                                    minValue={this.state.minValue}
-                                    maxValue={this.state.maxValue}
-                                    setMinValue={this.setMinValue}
-                                    setMaxValue={this.setMaxValue}
+                                    minValue={this.state.movieMinValue}
+                                    maxValue={this.state.movieMaxValue}
+                                    setMinValue={this.setMovieMinValue}
+                                    setMaxValue={this.setMovieMaxValue}
+                                    name={"Movie Rating Score"}
+                                />
+                                <RatingScores
+                                    minValue={this.state.reviewMinValue}
+                                    maxValue={this.state.reviewMaxValue}
+                                    setMinValue={this.setReviewMinValue}
+                                    setMaxValue={this.setReviewMaxValue}
+                                    name={"Review Rating Score"}
                                 />
                             </List>
                         </Box>

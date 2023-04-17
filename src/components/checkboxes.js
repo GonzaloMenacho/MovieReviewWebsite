@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 
-class CollapsableSearchCriteria extends React.Component {
+class Checkboxes extends React.Component {
     constructor(props) {
         super(props);
 
@@ -107,4 +107,4 @@ class CollapsableSearchCriteria extends React.Component {
     }
 }
 
-export default CollapsableSearchCriteria;
+export default Checkboxes;
