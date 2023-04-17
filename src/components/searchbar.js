@@ -4,23 +4,16 @@ import axios from "axios";
 import ResultsDisplay from "./resultsdisplay";
 
 const client = axios.create({
-  baseURL: "http://localhost:5001/api/",
+    baseURL: "https://localhost:7035/api/",
   header: { "X-Custom-Header": "foobar" },
 });
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    //this.handleMoviePostInputChange = this.handleMovieTitleInputChange.bind(this);
-    //this.handleReviewPostInputChange = this.handleReviewPostInputChange.bind(this);
-    //this.getReviews = this.getReviews.bind(this);
 
     this.state = {
       searchterm: "",
-      /*
-            movieposts: [],
-            reviewposts: []
-            */
     };
   }
 

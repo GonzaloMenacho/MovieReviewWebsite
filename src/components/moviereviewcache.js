@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 //import some review display component;
 
 const client = axios.create({
-  baseURL: "http://localhost:5001/api/",
+  baseURL: "https://localhost:7035/api/",
   header: { "X-Custom-Header": "foobar" },
 });
 

@@ -186,7 +186,11 @@ class AdvancedPopup extends React.Component {
                             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                                 Advanced Search
                             </Typography>
-                            <Button autoFocus color="inherit" onClick={this.handleSubmit}>
+                            <Button autoFocus color="inherit" onClick={() => {
+                                this.handleSubmit();
+                                this.props.onSearchButtonClick();
+                            }}
+                            >
                                 Search
                             </Button>
                             <Button autoFocus color="inherit" onClick={this.handleReset}>

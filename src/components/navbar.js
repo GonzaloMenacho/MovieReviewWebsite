@@ -11,6 +11,7 @@ export default function Navbar(props) {
           <AdvancedPopup
               onMoviePostChange={props.onMoviePostChange}
               onReviewPostChange={props.onReviewPostChange}
+              onSearchButtonClick={props.onSearchButtonClick}
           ></AdvancedPopup>
     </nav>
   );
