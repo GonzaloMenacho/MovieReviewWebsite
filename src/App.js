@@ -20,7 +20,7 @@ import MovieReviewList from "./components/moviereviewlist";
 import GroupedMovieReviews from "./components/reviewPrev";
 
 const client = axios.create({
-  baseURL: "http://localhost:5001/api/",
+  baseURL: "https://localhost:7035/api/",
   header: { "X-Custom-Header": "foobar" },
 });
 
@@ -74,6 +74,7 @@ export default class App extends React.Component {
           <Navbar
             onMoviePostChange={this.handleMoviePostChange}
             onReviewPostChange={this.handleReviewPostChange}
+            onSearchButtonClick={this.handleSearchButtonClick}
           />
         </div>
         <div className="searchbar">
