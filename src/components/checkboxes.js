@@ -38,8 +38,8 @@ class Checkboxes extends React.Component {
 
     render() {
         const {
-            contentRating,
-            handleContentRatingChange,
+            //contentRating,
+            //handleContentRatingChange,
             genre,
             handleGenreChange,
         } = this.props;

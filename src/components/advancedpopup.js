@@ -31,8 +31,8 @@ class AdvancedPopup extends React.Component {
         this.state = {
             open: false,
             textValues: [null, null, null, null, null, null],
-                // movie title, review keyword, mainstars, description, username,
-                // usefulness votes
+            // movie title, review keyword, mainstars, description, username,
+            // usefulness votes
             contentRating: Array.from({ length: 7 }, () => false),
             genre: Array.from({ length: 6 }, () => false),
             movieMinValue: null,
@@ -78,11 +78,11 @@ class AdvancedPopup extends React.Component {
         const value = evt.target.value;
         let arr = [...this.state.textValues];
         arr[index] = value;
-    this.setState({
-        ...this.state,
-        textValues: arr
-    });
-}
+        this.setState({
+            ...this.state,
+            textValues: arr
+        });
+    }
 
     handleContentRatingChange(index) {
         return (event) => {
@@ -105,9 +105,6 @@ class AdvancedPopup extends React.Component {
     }
 
     setMovieMinValue(value) {
-        if (this.state.movieMaxValue === null) {
-            this.setMovieMaxValue(5);
-        }
         this.setState({
             movieMinValue: value,
         });
@@ -120,9 +117,6 @@ class AdvancedPopup extends React.Component {
     }
 
     setReviewMinValue(value) {
-        if (this.state.reviewMaxValue === null) {
-            this.setReviewMaxValue(5);
-        }
         this.setState({
             reviewMinValue: value,
         });
@@ -163,7 +157,7 @@ class AdvancedPopup extends React.Component {
             }
         }
 
-        
+
         let formInfo = {
             movieTitle: textFields[0],
             reviewBody: textFields[1],
@@ -174,7 +168,7 @@ class AdvancedPopup extends React.Component {
 
             // also known as movieIMDbRating
             // multiply by 2 because rating is max is 5 stars in UI
-            
+
             totalUserRatingMinMax: null,
             movieGenres: null,
         };
@@ -262,28 +256,22 @@ class AdvancedPopup extends React.Component {
                                     textValues={this.state.textValues}
                                     handleTextChange={this.handleTextChange}
                                 />
-                                <MovieCriteriaAccordian
-                                    textValues={this.state.textValues}
-                                    handleTextChange={this.handleTextChange}
-                                />
-                                <Checkboxes
-                                    contentRating={this.state.contentRating}
-                                    handleContentRatingChange={this.handleContentRatingChange}
-                                    genre={this.state.genre}
-                                    handleGenreChange={this.handleGenreChange}
-                                />
-                                <RatingScores
-                                    minValue={this.state.movieMinValue}
-                                    maxValue={this.state.movieMaxValue}
-                                    setMinValue={this.setMovieMinValue}
-                                    setMaxValue={this.setMovieMaxValue}
-                                    name={"Movie Rating Score"}
-                                />
+                                <div>
+                                    <MovieCriteriaAccordian
+                                        textValues={this.state.textValues}
+                                        handleTextChange={this.handleTextChange}
+                                        genre={this.state.genre}
+                                        handleGenreChange={this.handleGenreChange}
+                                        minValue={this.state.movieMinValue}
+                                        maxValue={this.state.movieMaxValue}
+                                        setMinValue={this.setMovieMinValue}
+                                        setMaxValue={this.setMovieMaxValue}
+                                        name={"Movie Rating Score"}
+                                    />
+                                </div>
                                 <ReviewCriteriaAccordian
                                     textValues={this.state.textValues}
                                     handleTextChange={this.handleTextChange}
-                                />
-                                <RatingScores
                                     minValue={this.state.reviewMinValue}
                                     maxValue={this.state.reviewMaxValue}
                                     setMinValue={this.setReviewMinValue}

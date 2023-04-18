@@ -30,35 +30,24 @@ function RatingScores(props) {
 
     return (
         <>
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel2a-content"
-                    id="panel2a-header"
-                >
-                    <Typography>{props.name}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        <Typography component="legend">Minimum Rating</Typography>
-                        <Stack spacing={1}>
-                            <Rating
-                                name="min-rating"
-                                value={props.minValue}
-                                onChange={handleMinRatingChange}
-                                precision={0.5}
-                            />
-                            <Typography component="legend">Maximum Rating</Typography>
-                            <Rating
-                                name="max-rating"
-                                value={props.maxValue}
-                                onChange={handleMaxRatingChange}
-                                precision={0.5}
-                            />
-                        </Stack>
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
+            <Typography>
+                <Typography component="legend">Minimum Rating</Typography>
+                <Stack spacing={1}>
+                    <Rating
+                        name="min-rating"
+                        value={props.minValue}
+                        onChange={handleMinRatingChange}
+                        precision={0.5}
+                    />
+                    <Typography component="legend">Maximum Rating</Typography>
+                    <Rating
+                        name="max-rating"
+                        value={props.maxValue}
+                        onChange={handleMaxRatingChange}
+                        precision={0.5}
+                    />
+                </Stack>
+            </Typography>
         </>
     );
 }
