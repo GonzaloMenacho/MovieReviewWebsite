@@ -13,6 +13,8 @@ import Checkboxes from "./checkboxes";
 import AdvancedTextField from "./advancedtextfields";
 import RatingScores from "./ratingscores";
 import axios from "axios";
+import MovieCriteriaAccordian from "./moviecriteriaaccordian";
+import ReviewCriteriaAccordian from "./reviewcriteriaaccordian";
 
 const client = axios.create({
     baseURL: "https://localhost:7035/api/",
@@ -28,7 +30,9 @@ class AdvancedPopup extends React.Component {
         super(props);
         this.state = {
             open: false,
-            textValues: [null, null, null],
+            textValues: [null, null, null, null, null, null],
+                // movie title, review keyword, mainstars, description, username,
+                // usefulness votes
             contentRating: Array.from({ length: 7 }, () => false),
             genre: Array.from({ length: 6 }, () => false),
             movieMinValue: null,
@@ -60,7 +64,7 @@ class AdvancedPopup extends React.Component {
 
     handleReset() {
         this.setState({
-            textValues: ['','', ''],
+            textValues: ['', '', '', '', '', ''],
             contentRating: Array.from({ length: 7 }, () => false),
             genre: Array.from({ length: 6 }, () => false),
             movieMinValue: null,
@@ -70,16 +74,15 @@ class AdvancedPopup extends React.Component {
         });
     }
 
-    handleTextChange(event, index) {
-        this.setState({
-            textValues: [
-                ...this.state.textValues.slice(0, index),
-                event.target.value,
-                ...this.state.textValues.slice(index + 1),
-                ...this.state.textValues.slice(index + 2),
-            ],
-        });
-    }
+    handleTextChange(evt, index) {
+        const value = evt.target.value;
+        let arr = [...this.state.textValues];
+        arr[index] = value;
+    this.setState({
+        ...this.state,
+        textValues: arr
+    });
+}
 
     handleContentRatingChange(index) {
         return (event) => {
@@ -165,7 +168,9 @@ class AdvancedPopup extends React.Component {
             movieTitle: textFields[0],
             reviewBody: textFields[1],
             reviewTitle: textFields[1],
-            mainStars: [textFields[2]],
+            mainStars: null,
+            description: textFields[3],
+            username: textFields[4],
 
             // also known as movieIMDbRating
             // multiply by 2 because rating is max is 5 stars in UI
@@ -173,6 +178,10 @@ class AdvancedPopup extends React.Component {
             totalUserRatingMinMax: null,
             movieGenres: null,
         };
+
+        if (textFields[2] !== null) {
+            formInfo.mainStars = [textFields[2]];
+        }
 
         if (this.state.movieMinValue !== null && this.state.movieMaxValue !== null) {
             formInfo.totalUserRatingMinMax = [this.state.movieMinValue * 2, this.state.movieMaxValue * 2];
@@ -253,6 +262,10 @@ class AdvancedPopup extends React.Component {
                                     textValues={this.state.textValues}
                                     handleTextChange={this.handleTextChange}
                                 />
+                                <MovieCriteriaAccordian
+                                    textValues={this.state.textValues}
+                                    handleTextChange={this.handleTextChange}
+                                />
                                 <Checkboxes
                                     contentRating={this.state.contentRating}
                                     handleContentRatingChange={this.handleContentRatingChange}
@@ -265,6 +278,10 @@ class AdvancedPopup extends React.Component {
                                     setMinValue={this.setMovieMinValue}
                                     setMaxValue={this.setMovieMaxValue}
                                     name={"Movie Rating Score"}
+                                />
+                                <ReviewCriteriaAccordian
+                                    textValues={this.state.textValues}
+                                    handleTextChange={this.handleTextChange}
                                 />
                                 <RatingScores
                                     minValue={this.state.reviewMinValue}
