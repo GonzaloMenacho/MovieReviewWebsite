@@ -34,27 +34,29 @@ class GroupedMovieReviews extends Component {
 
     var movies = movieposts;
 
-    if (movies.length === 0 && localStorage.getItem("MovieDocuments")){
+    if (movies.length === 0){
         movies = JSON.parse(localStorage.getItem("MovieDocuments"));
     }
 
-    if (movies.length != reviewposts.length) {
 
-        // create a new array to store matching movies
-        var matchingMovies = [];
+    // create a new array to store matching movies
+    var matchingMovies = [];
+    var reviewMovieIDs = [];
 
-        // loop through the movies in the movielist
-        for (var movie of movies) {
-        // check if the movieID exists in the reviewlist
-        var reviewIndex = reviewposts.findIndex(reviews => reviews.some(review => review.movieID === movie.movieID));
-        if (reviewIndex !== -1) {
-            // if it does, add the movie to the matchingMovies array
-            matchingMovies.push(movie);
+    reviewposts.forEach(reviewArray => {
+        reviewMovieIDs.push(reviewArray[0].movieID);
+        console.log(reviewArray[0].movieID);
+    });
+
+    reviewMovieIDs.forEach(revMovieID => {
+        movies.forEach(movie => {
+            if (movie.movieID == revMovieID) {
+                matchingMovies.push(movie);
             }
-        }
+        })
+    });
 
-        movies = matchingMovies;
-    }
+    movies = matchingMovies;
 
     console.log(movies);
 
