@@ -46,7 +46,7 @@ class GroupedMovieReviews extends Component {
 
     reviewposts.forEach(reviewArray => {
         reviewMovieIDs.push(reviewArray[0].movieID);
-        console.log(reviewArray[0].movieID);
+        //console.log(reviewArray[0].movieID);
     });
 
     reviewMovieIDs.forEach(revMovieID => {
@@ -59,7 +59,7 @@ class GroupedMovieReviews extends Component {
 
     movies = matchingMovies;
 
-    console.log(movies);
+    //console.log(movies);
 
     const movieReviewComponents = movies.map((movie,index) => (
         <MovieReviewCard key={index} movie={movie} reviews={reviewposts[index]} />

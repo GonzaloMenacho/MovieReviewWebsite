@@ -43,21 +43,11 @@ class SearchBar extends React.Component {
     try {
       await client.get(`Movies/search?term=${this.state.searchterm}`).then((response) => {
           var data = response.data;
-
-          // save the MovieReview object into easily accessible state variables
-          /*
-                this.setState({
-                    movieposts: data.movieDocuments,        // list<movies>
-                    reviewposts: data.reviewDocuments,      // list<list<reviews>>
-                })
-                */
-          console.log(JSON.stringify(data.movieDocuments));
-          console.log(JSON.stringify(data.reviewDocuments));
+          //console.log(JSON.stringify(data.movieDocuments));
+          //console.log(JSON.stringify(data.reviewDocuments));
 
           this.handleMoviePostInputChange({ target: { value: data.movieDocuments } });
           this.handleReviewPostInputChange({ target: { value: data.reviewDocuments } });
-          //sessionStorage.setItem('MovieDocuments', JSON.stringify(data.movieDocuments));
-          //sessionStorage.setItem('ReviewDocuments', JSON.stringify(data.reviewDocuments));
         });
     } catch (error) {
       console.log(error);

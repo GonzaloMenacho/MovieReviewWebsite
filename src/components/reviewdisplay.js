@@ -18,7 +18,7 @@ class ReviewDisplay extends React.Component {
     }
 
     addAllReviewsToDisplay = () => {
-        console.log("Button Clicked")
+        //console.log("Button Clicked")
         client.get('Movies/getall').then((response) => {
             this.setState({
                 posts: response.data
