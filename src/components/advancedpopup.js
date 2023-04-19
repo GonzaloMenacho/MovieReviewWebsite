@@ -170,6 +170,7 @@ class AdvancedPopup extends React.Component {
             // multiply by 2 because rating is max is 5 stars in UI
 
             totalUserRatingMinMax: null,
+            reviewUserRatingMinMax: null,
             movieGenres: null,
         };
 
@@ -179,6 +180,10 @@ class AdvancedPopup extends React.Component {
 
         if (this.state.movieMinValue !== null && this.state.movieMaxValue !== null) {
             formInfo.totalUserRatingMinMax = [this.state.movieMinValue * 2, this.state.movieMaxValue * 2];
+        }
+
+        if (this.state.reviewMinValue !== null && this.state.reviewMaxValue !== null) {
+            formInfo.reviewUserRatingMinMax = [this.state.reviewMinValue * 2, this.state.reviewMaxValue * 2];
         }
 
         if (genreList.length > 0) {
