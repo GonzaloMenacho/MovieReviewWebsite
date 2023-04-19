@@ -25,13 +25,6 @@ class SearchBar extends React.Component {
     this.props.onReviewPostChange(event.target.value);
     }
 
-    handleKeyPress(event) {
-        if (event.key == "Enter") {
-            this.props.onSearchButtonClick(); // set carousel to false
-            this.getReviews();
-        }
-    }
-
 
   // updates the input field when something is being typed
   changeValue = (event) => {
