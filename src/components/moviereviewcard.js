@@ -62,7 +62,7 @@ class MovieReviewCard extends Component {
                         aria-controls={`panel${index}a-content`}
                         id={`panel${index}a-header`}>
                         <Typography sx={{
-                            color: review.userRating > 7 ? "royalblue" : review.userRating < 4 ? "red" : "teal",
+                            color: review.userRating > 7 ? "royalblue" : review.userRating < 5 ? "red" : "teal",
                             width: '8%',
                             minWidth: 60,
                             whiteSpace: 'nowrap',
@@ -78,7 +78,7 @@ class MovieReviewCard extends Component {
                                     minWidth: 40,
                                     flexShrink: 0
                                 }} />
-                            ) : review.userRating < 4 ? (
+                            ) : review.userRating < 5 ? (
                                 <ThumbDown sx={{
                                     color: 'red',
                                     width: '5%',
@@ -106,7 +106,7 @@ class MovieReviewCard extends Component {
                         >
                             <span style={{
                                 fontWeight: 'bold',
-                                color: review.userRating > 7 ? "royalblue" : review.userRating < 4 ? "red" : "teal",
+                                color: review.userRating > 7 ? "royalblue" : review.userRating < 5 ? "red" : "teal",
                             }}>{review.username}</span> says...
                         </Typography>
                         <Box sx={{padding: '16px'}}>
@@ -145,7 +145,7 @@ class MovieReviewCard extends Component {
                         >
                             <span style={{
                                 fontWeight: 'bold',
-                                color: review.usefulnessVote / review.totalVotes > .85 ? "royalblue" : review.usefulnessVote / review.totalVotes < .55 ? "red" : "teal",
+                                color: review.usefulnessVote / review.totalVotes > .85 ? "royalblue" : review.usefulnessVote / review.totalVotes < .6 ? "red" : "teal",
                             }}>
                             {review.usefulnessVote}</span> out of {review.totalVotes} users found this review helpful.
                         </Typography>

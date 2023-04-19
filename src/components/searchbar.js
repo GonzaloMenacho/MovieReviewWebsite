@@ -77,7 +77,8 @@ class SearchBar extends React.Component {
               type="text"
               placeholder="Search a Movie..."
               name="searchbar"
-              value={this.state.searchterm}
+            value={this.state.searchterm}
+            style={{ borderRadius: "100px" }}
             />
 
             <button
