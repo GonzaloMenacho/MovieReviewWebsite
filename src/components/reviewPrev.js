@@ -34,6 +34,7 @@ class GroupedMovieReviews extends Component {
 
     var movies = movieposts;
 
+    if (movies.length === 0 && localStorage.getItem("MovieDocuments"))
       if (movies.length === 0 && localStorage.getItem("MovieDocuments")) {
         movies = JSON.parse(localStorage.getItem("MovieDocuments"));
     }
