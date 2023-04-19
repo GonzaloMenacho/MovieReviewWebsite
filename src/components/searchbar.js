@@ -23,7 +23,14 @@ class SearchBar extends React.Component {
 
   handleReviewPostInputChange(event) {
     this.props.onReviewPostChange(event.target.value);
-  }
+    }
+
+    handleKeyPress(event) {
+        if (event.key == "Enter") {
+            this.props.onSearchButtonClick(); // set carousel to false
+            this.getReviews();
+        }
+    }
 
 
   // updates the input field when something is being typed
@@ -72,11 +79,17 @@ class SearchBar extends React.Component {
         <div className="search">
           <div className="search-field">
             <input
-              className="search-bar"
-              onChange={this.changeValue}
-              type="text"
-              placeholder="Search a Movie..."
-              name="searchbar"
+            className="search-bar"
+            onChange={this.changeValue}
+            onKeyDown={(event) => {
+                if (event.key == "Enter") {
+                    this.props.onSearchButtonClick(); // set carousel to false
+                    this.getReviews();
+                }
+            }}
+            type="text"
+            placeholder="Search a Movie..."
+            name="searchbar"
             value={this.state.searchterm}
             style={{ borderRadius: "100px" }}
             />
@@ -92,14 +105,6 @@ class SearchBar extends React.Component {
             </button>
           </div>
         </div>
-        {/*
-                    <div className="results">
-                        <ResultsDisplay
-                            movieposts={this.state.movieposts}
-                            reviewposts={this.state.reviewposts}
-                        />
-                    </div>
-                */}
       </>
     );
   }
