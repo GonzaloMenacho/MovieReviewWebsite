@@ -52,8 +52,8 @@ class MovieReviewCard extends Component {
                 <Accordion
                     key={index}
                     sx={{
-                        minWidth: WidthFull * .20,
-                        maxWidth: WidthFull * .80
+                        minWidth: WidthFull * .80,
+                        maxWidth: WidthFull * .80,
                     }}
                     expanded={this.state.expanded === `panel${index}`}
                     onChange={this.handleChange(`panel${index}`)}>
@@ -63,8 +63,9 @@ class MovieReviewCard extends Component {
                         id={`panel${index}a-header`}>
                         <Typography sx={{
                             color: review.userRating > 7 ? "royalblue" : review.userRating < 5 ? "red" : "teal",
-                            width: '8%',
-                            minWidth: 60,
+                            width: '5%',
+                            minWidth: 50,
+                            maxWidth: 50,
                             whiteSpace: 'nowrap',
                             flexShrink: 0
                         }}>
@@ -97,12 +98,15 @@ class MovieReviewCard extends Component {
                             {review.reviewTitle}
                         </Typography>
                 </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails id={index}
+                        sx={{
+
+                        }}>
                         <Typography
                             sx={{ color: 'black'}}
                             variant="h6"
                             component="span"
-                            gutterBottom
+                            gutterbottom="true"
                         >
                             <span style={{
                                 fontWeight: 'bold',
@@ -112,10 +116,10 @@ class MovieReviewCard extends Component {
                         <Box sx={{padding: '16px'}}>
                             <Card
                                 sx={{
-                                
+                                    
                                 }}
                                 variant="outlined"
-                                gutterBottom
+                                gutterbottom="true"
                             >
                             <CardContent>
                                 <Typography sx={{
@@ -129,7 +133,7 @@ class MovieReviewCard extends Component {
                         <Typography
                             sx={{ color: 'text.secondary' }}
                             variant="h6"
-                            gutterBottom
+                            gutterbottom="true"
                         >
                             {new Date(review.dateofReview).toLocaleString('en-US', {
                                 month: 'long',
