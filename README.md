@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# Los Movie Reviews
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a movie review website with a basic search engine, developed with CallMiner. 
 
-## Available Scripts
+This project utilizes the Elastic stack to search through thousands of records efficiently, before displaying the results in a custom-made React.JS website. 
 
-In the project directory, you can run:
+The purpose of the project was to gain experience developing software in an Agile workplace, while also learning how to use a popular development framework.
 
-### `npm start`
+![image](https://github.com/mdagostino00/MovieReviewWebsite/assets/80493791/bc6b09b9-4793-475f-b3cd-71869940f690)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+This project should be able to be run locally, with the use of Docker and an IDE like Visual Studio.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Currently, only the Elastic backend has been Dockerized, the API and React website will be ran natively.
 
-### `npm run build`
+### Installing Docker
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[Follow the instructions here to install Docker Desktop for Windows 10/11.](https://github.com/GonzaloMenacho/StandUpApi/blob/master/docker/README.md)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If you have another way to install Docker, then use the method that works best.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Install the StandUpApi Repository
 
-### `npm run eject`
+[Install The StandUpApi repo,](https://github.com/GonzaloMenacho/StandUpApi) which is needed for the React website to pull data from the Elastic database.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Make sure that this project is linked to the MovieReviewWebsite solution before running, or you won't be able to pull reviews.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Run the project
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+With everything installed and Docker running, you should be able to start the project by clicking the "Start" button in your IDE.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The project connects locally using an https connection (using localhost:<port>).
 
-## Learn More
+![image](https://github.com/mdagostino00/MovieReviewWebsite/assets/80493791/ed732f8e-e3c6-48ff-b2b3-b5b029c13e76)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![image](https://github.com/mdagostino00/MovieReviewWebsite/assets/80493791/f2a2fdc5-ff49-4e01-ba24-35c0f03c3bd8)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Credits
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Thank you to [CallMiner](https://callminer.com/) and [James Hood](https://www.linkedin.com/in/jamesrhood/) for working with us on this project and providing an amazing experience and great knowledge.
 
-### Analyzing the Bundle Size
+Here are our developer's LinkedIn pages:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[Michael D'Agostino](https://www.linkedin.com/in/mdagostino00/)
 
-### Making a Progressive Web App
+[Gonzalo Menacho](https://www.linkedin.com/in/gonzalo-menacho/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[Elijah Nieves](https://www.linkedin.com/in/elijah-nieves/)
 
-### Advanced Configuration
+[Robert McNiven](https://www.linkedin.com/in/robertmcniven/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## License
 
-### Deployment
+This project was created during a senior project mentorship with CallMiner. We are not offering a license for this code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please don't use or modify the software. This public repository's purpose is to share our knowledge and skills with others.
